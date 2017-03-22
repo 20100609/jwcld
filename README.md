@@ -2,6 +2,7 @@
 Thinkphp framework website
 
 北师大教务处领导干部听课平台项目
+Thinkphp 3.1.3 version support
 
 1. 访问路径：http://localhost:端口号/jwcld/index.php/Index/index
 2. 删除 \jwcld\jwcld\Runtime 下除default.html文件以外的所有文件【缓存文档，会影响修改后页面效果】
