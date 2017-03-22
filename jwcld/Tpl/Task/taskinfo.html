@@ -1,0 +1,124 @@
+<include file="./jwcld/Tpl/headerTemp.html" />
+<section id='content'>
+    <div class='container-fluid'>
+        <div class='row-fluid' id='content-wrapper'>
+        <div class='span12'>
+            <div class='row-fluid'>
+                <div class='span6'>
+                    <div class='page-header'>
+                        <h1 class='pull-left'>
+                            <i class='icon-tasks'></i>
+                            <span>听课任务-修改</span>
+                        </h1>
+                    </div>
+                </div>  
+                <div class='row-fluid'>
+                    <div class='span12 box'>
+                        <div class='box-header green-background'>
+                            <div class='title'>
+                                <div class='icon-edit'></div>
+                                任务信息
+                            </div>
+                        </div>
+                        <div class='box-content'>
+                            <form accept-charset="UTF-8" action="{:U('Task/editTask')}" class="form form-horizontal" method="post" style="margin-bottom: 0;"> 
+
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>课程名称</label>
+                                    <div class='controls'>
+                                        <input id='inputNumber' type='text' name='cname' value='{$taskinfo.cname}' disabled='disabled'/>
+                                    </div>
+                                </div>
+
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>课程类别</label>
+                                    <div class='controls'>
+                                        <input id='inputText1' type='text' name='category' value='{$taskinfo.category1} | {$taskinfo.category2}' disabled='disabled' />
+                                    </div>
+                                </div>
+
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>上课时间</label>
+                                    <div class='controls'>
+                                        <input id='inputText1' type='text' name='ctime' value='{$taskinfo.ctime}' />
+                                    </div>                    
+                                </div>
+
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>学生院系</label>
+                                    <div class='controls'>
+                                        <input id='inputNumber' type='text' name='scollege' value='{$taskinfo.scollege}' disabled='disabled'/>
+                                    </div>
+                                </div>
+
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>教师院系</label>
+                                    <div class='controls'>
+                                        <input id='inputNumber' type='text' name='tcollege' value='{$taskinfo.tcollege}' disabled='disabled'/>
+                                    </div>
+                                </div>
+
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>教师姓名</label>
+                                    <div class='controls'>
+                                        <input id='inputNumber' type='text' name='tname' value='{$taskinfo.tname}' disabled='disabled'/>
+                                    </div>
+                                </div>
+
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>听课时间</label>                     
+                                    <div class='controls'>
+                                        <div class='datepicker input-append' id='datepicker'>
+                                            <input class='edittime' data-format='yyyy-MM-dd' placeholder='' type='text' value='{$taskinfo.tktime}' name='tktime'/>
+                                            <span class='add-on'>
+                                                <i data-date-icon='icon-calendar' data-time-icon='icon-time'></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                  
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputSelect'>听课专题</label>
+                                    <div class='controls'>
+                                        <select id='inputSelect' name='topic'>
+                                            <option value='{$taskinfo.topic}' selected="selected">{$taskinfo.topic}</option>
+                                            <volist name='topiclist' id='vo'>
+                                                <option value='{$vo.topicname}'>{$vo.topicname}</option>
+                                            </volist>
+                                        </select>                                
+                                    </div>
+                                </div>
+
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>听课专家</label>
+                                    <div class='controls'>
+                                        <select id='inputSelect' name='did'>
+                                            <option value='{$taskinfo.did}' selected="selected">{$taskinfo.dname}</option>
+                                            <volist name='dd' id='vo'>
+                                                <option value='{$vo.did}'>{$vo.name}</option>
+                                            </volist>
+                                        </select>     
+                                    </div>
+                                </div>
+
+                                <div class='form-actions'>
+                                    <input type='hidden' name='tid' value='{$taskinfo.tid}'>
+                                    <button class='btn btn-primary' type='submit'><i class='icon-save'></i>&nbsp;提交</button>
+                                    <a class='btn' style="margin-left: 20px;" href="{:U('Task/showTask')}"><i class='icon-remove'></i>&nbsp;取消</a>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#tmanager').nav_slide('tmanager','showTask');
+    });
+</script> 
+<include file="./jwcld/Tpl/footerTemp.html" />

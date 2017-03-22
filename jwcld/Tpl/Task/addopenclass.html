@@ -1,0 +1,345 @@
+<include file="./jwcld/Tpl/headerTemp.html" />
+<section id='content'>
+    <div class='container-fluid'>
+    <div class='row-fluid' id='content-wrapper'>
+    <div class='span12'>
+    <div class='row-fluid'>
+        <div class='span12'>
+            <div class='page-header'>
+                <h1 class='pull-left'>
+                    <i class='icon-table'></i>
+                    <span>听课记录在线表单填写</span>
+                </h1>
+                <div class='span4 pull-right'>
+                    <form id="form1" class="form-horizontal" method="post" action="{:U('Task/addRecordT',array('tid'=>$task_course['tid']))}">
+                        <div class="control-group">
+                            <label class="control-label" for="inputTopic"><strong>听课记录表类型</strong></label>
+                            <div class="controls">
+                                <select class='select2 input-block-level' name="tktype" id="selYt">
+                                    <option value='-1' selected="selected"/>------请选择------
+                                    <option value="1">领导干部听课记录表</option>
+                                    <option value="2">本科教学观摩课听课记录表</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+	
+<div class='row-fluid'>
+    <div class='span12 box bordered-box green-border' style='margin-bottom:0;'>
+        <div class='box-header green-background'>
+            <div class='text-center'>北京师范大学本科教学督导团专家实验课巡查记录表（2015版）</div>
+        </div>
+        <div class=''>
+		<form accept-charset="UTF-8" action="{:U('Task/saveRecordT')}" class="form form-horizontal" method="post" style="margin-bottom: 0;">
+            <div class='responsive-table'>
+                <div class='scrollable-area'>
+                    <table class='table table-bordered table-hover table-striped' style='margin-bottom:0;'>
+                        <tr>
+                            <th>课程类型</th>
+                            <td colspan="9">
+                                <div>
+                                    <label class="checkbox inline">
+                                        <input type="checkbox" name="topic[]" value="独立开设的实验课">&nbsp;独立开设的实验课
+                                    </label>
+                                    <label class="checkbox inline">
+                                        <input type="checkbox" name="topic[]" value="与理论配合的实验课">&nbsp;与理论配合的实验课
+                                    </label>
+                                    <label class="checkbox inline">
+                                        <input type="checkbox" name="topic[]" value="绪论课">&nbsp;绪论课
+                                    </label>
+                                    <label class="checkbox inline">
+                                        其他&nbsp;&nbsp;<input type="text" class="input-xxlarge" name="others">
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="checkbox inline">
+                                        <input type="checkbox" name="labtype[]" value="基础性实验">&nbsp;基础性实验
+                                    </label>
+                                    <label class="checkbox inline">
+                                        <input type="checkbox" name="labtype[]" value="综合性实验">&nbsp;综合性实验
+                                    </label>
+                                    <label class="checkbox inline">
+                                        <input type="checkbox" name="labtype[]" value="设计性实验">&nbsp;设计性实验
+                                    </label>
+                                    <label class="checkbox inline">
+                                        其他&nbsp;&nbsp;<input type="text" class="input-xxlarge" name="others_lab">
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>课程名称</th>
+                            <td colspan="2">
+                                <input class='span12' id='full-name' type='text' disabled="disabled" name='cname' value='{$data_course.cname}' />
+                            </td>
+                            <th>学生院系/年级</th>
+                            <td>
+                                <input class='span12' id='full-name' type='text' disabled="disabled" name='sc' value='{$data_course.scollege} / {$data_course.sclass}' />
+                            </td>
+                            <th colspan="2">上课地点</th>
+                            <td colspan="3">
+                                <input class='span12' id='full-name' type='text' disabled="disabled" name='cplase' value='{$data_course.cplace}' />
+                            </td>  
+                        </tr>
+                        <tr>
+                            <th>教师姓名</th>
+                            <td>
+                                <input class='span12' id='full-name' type='text' disabled="disabled" name='tname' value='{$data_course.tname}' />
+                            </td>
+                            <th >教师单位</th>
+                            <td colspan="2">
+                                <!--<textarea class="form-control" rows="2" disabled="disabled">生命科学与技术学院</textarea>-->
+                                <input class='span12' id='full-name' type='text' disabled="disabled" name='tcollege' value='{$data_course.tcollege}' />
+                            </td>
+                            <th colspan="2">上课时间</th>
+                            <td colspan="3">
+                                <input class='span12' id='full-name' type='text' disabled="disabled" name='ctime' value='{$data_course.ctime}' />
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <th>教师职称</th>
+                            <td>
+                                <input class='span12' id='full-name' type='text' disabled="disabled" name='title' value='{$data_course.title}' />
+                            </td>
+                            <th>巡查时间</th>
+                            <td colspan="2">
+                                <div>
+                                    <div class='datepicker input-append' id='datepicker'>
+                                        <input class='input-medium' data-format='yyyy-MM-dd' type='text' name='tktime' required/>
+                                        <span class='add-on'>
+                                        <i data-date-icon='icon-calendar' data-time-icon='icon-time'></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <th colspan="2">听课节数</th>
+                            <td colspan="3">
+                                <input class='span12' id='full-name' type='number' name='tkjs' placeholder="听课的总节数(如2,3等)" required/>
+                            </td>
+                        </tr> 
+                        <tr>
+                            <th>技术人员姓名</th>
+                            <td>
+                                <input class='span12' id='full-name' type='text' name='tech_name' required />
+                            </td>
+                            <th>技术人员职称</th>
+                            <td>
+                                <input class='input-medium' type='text' name='tech_title' required/>
+                            </td>
+                            <th>工作单位</th>
+                            <td colspan="5">
+                                <input class='span12' id='full-name' type='text' name='tech_work' required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>主要授课内容</th>
+                            <td colspan="9">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" style="margin-left: 0px; margin-right: 0px; width: 950px;" name="content"></textarea>
+                                </div>
+                            </td>
+                        </tr> 
+                        <tr>
+                            <th>评价指标</th>
+                            <th colspan="4" style="text-align:center">主要观察点及评价“好”的标准（请再五个等级中选择）</th>
+                            <th>好</th>
+                            <th>较好</th>
+                            <th>一般</th>
+                            <th>较差</th>
+                            <th>差</th>
+                        </tr>
+                        <tr>
+                            <th rowspan="3">
+                                实验教学<br/>准备情况
+                            </th>
+                            <th colspan="4">* 认真做好实验准备，拟定的实验目的、要求明确，科学性、可操作性强，安全措施到位</th>
+                            <td><input id='' type='radio' value='1' name='jxtd_rz' required/></td>
+                            <td><input id='' type='radio' value='2' name='jxtd_rz'/></td>
+                            <td><input id='' type='radio' value='3' name='jxtd_rz' /></td>
+                            <td><input id='' type='radio' value='4' name='jxtd_rz'/></td>
+                            <td><input id='' type='radio' value='5' name='jxtd_rz'/></td>
+                        </tr>
+                        <tr>
+                            <th colspan="4">*仪器设备、软件、材料、试剂等数量充足、质量好,性能较先进，能确保实验顺利完成</th>
+                            <td><input id='' type='radio' value='1' name='jxtd_kqzb' required/></td>
+                            <td><input id='' type='radio' value='2' name='jxtd_kqzb'/></td>
+                            <td><input id='' type='radio' value='3' name='jxtd_kqzb' /></td>
+                            <td><input id='' type='radio' value='4' name='jxtd_kqzb'/></td>
+                            <td><input id='' type='radio' value='5' name='jxtd_kqzb'/></td>
+                        </tr>
+                        <tr>
+                            <th colspan="4">选用高水平实验教材与参考文献或自编教材，指导学生做好实验的预习、准备工作</th>
+                            <td><input id='' type='radio' value='1' name='jxtd_sy' required/></td>
+                            <td><input id='' type='radio' value='2' name='jxtd_sy'/></td>
+                            <td><input id='' type='radio' value='3' name='jxtd_sy' /></td>
+                            <td><input id='' type='radio' value='4' name='jxtd_sy'/></td>
+                            <td><input id='' type='radio' value='5' name='jxtd_sy'/></td>
+                        </tr> 
+                        <tr>
+                            <th rowspan="3">
+                                实验室<br />教学情况<br />(教师)
+                            </th>
+                            <th colspan="4">*坚持以德树人，教学理念先进，严格要求学生求真务实、遵守操作规程</th>
+                            <td><input id='' type='radio' value='1' name='jxnr_nrfh' required/></td>
+                            <td><input id='' type='radio' value='2' name='jxnr_nrfh'/></td>
+                            <td><input id='' type='radio' value='3' name='jxnr_nrfh' /></td>
+                            <td><input id='' type='radio' value='4' name='jxnr_nrfh'/></td>
+                            <td><input id='' type='radio' value='5' name='jxnr_nrfh'/></td>
+                        </tr> 
+                        <tr>
+
+                            <th colspan="4">注重科学精神的培养，讲授或答疑求实、严谨，重点突出，条理清晰，启发性强</th>
+                            <td><input id='' type='radio' value='1' name='jxnr_nrcs' required/></td>
+                            <td><input id='' type='radio' value='2' name='jxnr_nrcs'/></td>
+                            <td><input id='' type='radio' value='3' name='jxnr_nrcs' /></td>
+                            <td><input id='' type='radio' value='4' name='jxnr_nrcs'/></td>
+                            <td><input id='' type='radio' value='5' name='jxnr_nrcs'/></td>
+                        </tr> 
+                        <tr>
+                            <th colspan="4">及时给予学生启发、指导和帮助 ,实验报告批阅认真，成绩评定科学规范</th>
+                            <td><input id='' type='radio' value='1' name='jxnr_sy' required/></td>
+                            <td><input id='' type='radio' value='2' name='jxnr_sy'/></td>
+                            <td><input id='' type='radio' value='3' name='jxnr_sy' /></td>
+                            <td><input id='' type='radio' value='4' name='jxnr_sy'/></td>
+                            <td><input id='' type='radio' value='5' name='jxnr_sy'/></td>
+                        </tr>
+
+                        <tr>
+                            <th rowspan="3">
+                                实验室<br />学习情况<br />(学生)
+                            </th>
+                            <th colspan="4">*自觉遵守实验室规章制度，操作规范，台面整洁、注重安全</th>
+                            <td><input id='' type='radio' value='1' name='jxff_ktzx' required/></td>
+                            <td><input id='' type='radio' value='2' name='jxff_ktzx' /></td>
+                            <td><input id='' type='radio' value='3' name='jxff_ktzx' /></td>
+                            <td><input id='' type='radio' value='4' name='jxff_ktzx' /></td>
+                            <td><input id='' type='radio' value='5' name='jxff_ktzx' /></td>
+                        </tr>
+                        <tr>
+                            <th colspan="4">勤动手、勤观察，积极思考和探索解决实验中遇到的问题</th>
+                            <td><input id='' type='radio' value='1' name='jxff_fzjx' required/></td>
+                            <td><input id='' type='radio' value='2' name='jxff_fzjx' /></td>
+                            <td><input id='' type='radio' value='3' name='jxff_fzjx' /></td>
+                            <td><input id='' type='radio' value='4' name='jxff_fzjx' /></td>
+                            <td><input id='' type='radio' value='5' name='jxff_fzjx' /></td>
+                        </tr>
+                        <tr>
+                            <th colspan="4">随时记录实验现象，采集的数据真实有效，认真撰写并按时提交实验报告</th>
+                            <td><input id='' type='radio' value='1' name='jxff_jxgj' required/></td>
+                            <td><input id='' type='radio' value='2' name='jxff_jxgj' /></td>
+                            <td><input id='' type='radio' value='3' name='jxff_jxgj' /></td>
+                            <td><input id='' type='radio' value='4' name='jxff_jxgj' /></td>
+                            <td><input id='' type='radio' value='5' name='jxff_jxgj' /></td>
+                        </tr>  
+                        <tr>
+                            <th>绪论课评价</th>
+                            <td colspan="9">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" style="margin-left: 0px; margin-right: 0px; width: 950px;" name="xlkpj" placeholder="第一次“绪论”课上是否包含以下内容：介绍学习本门课程的目的、意义、要求与学习方法；学科发展现状与教学设想；教材、主要参考书与参考文献；平时与期末成绩评定；教学团队与人员安排等。是否为大一新生的实验绪论课，课上是否有明确的“导引”内容与相关举措。"></textarea>
+                                </div>
+                            </td>
+                        </tr> 
+                        <tr>
+                            <th>对实验室教学的评价与建议</th>
+                            <td colspan="9">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" style="margin-left: 0px; margin-right: 0px; width: 950px;" name="pjjy" placeholder="参考上述指标进行综合评价，考察教师在培养学生科学素养，发挥其在教学中的主体作用，促进进学生独立思考、增强操作能力等方面采取的措施、效果，并提出建议。" required></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>助教工作情况</th>
+                            <td colspan="9">
+                                <div class="form-group">
+                                    <!--label for="name">文本框</label-->
+                                    <textarea class="form-control" rows="3" style="margin-left: 0px; margin-right: 0px; width: 950px;" name="zjgz" placeholder="本门课程是否配有助教（姓名、专业、年级），助教是否全程参加本次实验课，其工作内容和表现（检查考勤、收发实验报告、答疑）等"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>学生学习情况的意见或建议</th>
+                            <td colspan="9">
+                                <div class="form-group">
+                                    <div class="form-inline">
+                                        &nbsp;实验组数(组):&nbsp;<input class="input-small" type="number" value="0" style="height: 30px;" name="zushu" >&nbsp;&nbsp;&nbsp;
+                                        学生人数/组(名):&nbsp;<input class="input-small" type="number" value="0" style="height: 30px;" name="renshu" >&nbsp;&nbsp;&nbsp;
+                                        应到(名):&nbsp;<input class="input-small" type="number" value="0" style="height: 30px;" name="yingdao" >&nbsp;&nbsp;&nbsp;
+                                        实到(名):&nbsp;<input class="input-small" type="number" value="0" style="height: 30px;" name="shidao" >&nbsp;&nbsp;&nbsp;
+                                        迟到(名):&nbsp;<input class="input-small" type="number" value="0" style="height: 30px;" name="chidao" >
+                                    </div>
+                                    
+                                    <textarea class="form-control" rows="3" style="margin-left: 0px; margin-right: 0px; width: 950px;" name="xsjy" placeholder="遵守实验室纪律、实验时的参与度、专注度， 对实验教学的反映等"></textarea>
+                                </div>
+                            </td>
+                        </tr> 
+                        <tr>
+                            <th>总体评价</th>
+                            <td colspan="9">
+                                <div class="form-group">
+                                    <!--label for="name">文本框</label-->
+                                    <label class="radio inline">
+                                        <input id='' type='radio' value='1' name='ztpj' required/>&nbsp;&nbsp;好
+                                    </label>
+                                    <label class="radio inline">
+                                        <input id='' type='radio' value='2' name='ztpj' required />&nbsp;&nbsp;较好
+                                    </label>
+                                    <label class="radio inline">
+                                        <input id='' type='radio' value='3' name='ztpj' required />&nbsp;&nbsp;一般
+                                    </label>
+                                    <label class="radio inline">
+                                        <input id='' type='radio' value='4' name='ztpj' required />&nbsp;&nbsp;较差
+                                    </label>
+                                    <label class="radio inline">
+                                        <input id='' type='radio' value='5' name='ztpj' required />&nbsp;&nbsp;差
+                                    </label>
+                                    <label class="radio inline">
+                                        <input id='' type='radio' value='6' name='ztpj' required checked="checked" />&nbsp;&nbsp;未评价
+                                    </label>
+                                </div>
+                            </td>
+                        </tr> 
+                        <tr>
+                            <th>对教学环境、教学服务情况的意见与建议</th>
+                            <td colspan="9">
+                                <div class="form-group">
+                                    <!--label for="name">文本框</label-->
+                                    <textarea class="form-control" rows="3" style="margin-left: 0px; margin-right: 0px; width: 950px;" name="hjjy" placeholder="教学楼、实验室的环境、卫生、文化氛围，实验室规章制度张贴，公用仪器、药品的摆放，通风管道、电闸、防火淋浴，疏散通道等安全设施是否能正常投入使用等情况。"></textarea>
+                                </div>
+                            </td>
+                        </tr>  
+                        <tr>
+                            <td colspan="10">
+                                说明：本表只是巡查的实况记录，仅作为教师教学与学生学习情况评价的参考，不作为或决定对一门课程的全面评价。
+                                <br />
+                                <div class="pull-right">北京师范大学本科督导团制表</div>
+                            </td>
+                        </tr>                                     
+                    </table>
+					<input type='hidden' name='tid' value='{$task_course.tid}'>
+                    <input type='hidden' name='rtype' value='2'>
+                    <button class='btn btn-success' type='submit' style='margin-right:20px;'><i class='icon-save'></i>提交</button>
+                    <button class='btn'><a href="{:U('Task/showTask')}">取消</a></button>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#selYt').change(function(){
+            $('#form1').submit();
+        });
+    });
+</script>
+</section>
+<include file="./jwcld/Tpl/footerTemp.html" />

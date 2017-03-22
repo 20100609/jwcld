@@ -1,0 +1,353 @@
+<include file="./jwcld/Tpl/headerTemp.html" />
+<section id='content'>
+<div class='container-fluid'>
+<div class='row-fluid' id='content-wrapper'>
+<div class='span12'>
+    <div class='row-fluid'>
+        <div class='span12'>
+            <div class='page-header'>
+                <h1 class='pull-left'>
+                    <i class='icon-tasks'></i>
+                    <span>已填的听课记录</span>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <form method="post" action="{:U('Task/showTask')}">
+    <if condition="$Think.session.userRole eq 1">
+    <div id="search">
+    <div class='row-fluid'>
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>课程名称</strong>
+            <input class='input-block-level' name="cname" type="text" />
+        </div>
+    </div>
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>教师名称</strong>
+            <input class='input-block-level' name="teaname" type="text" />
+        </div>
+    </div>
+    <if condition="$Think.session.userRole lt 4">
+    <div class='span4'>
+        <div class='row-fluid'>
+            <strong>教师单位</strong>
+            <select class='select2 input-block-level' name='tcollege'>
+                <option value='-1' />------请选择------
+                <volist name="tcollege" id="vo3">
+                    <option value="{$vo3.college}">{$vo3.college}</option>
+                </volist>
+            </select>
+        </div>
+    </div>
+    </if>
+    </div>
+
+    <div class='row-fluid' style="margin-top:10px; margin-bottom:2px;">
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>听课月份</strong>
+            <select class='select2 input-block-level' name='tkmonth'>
+                <option value='-1' />------请选择------
+                <option value="1">1月</option>
+                <option value="2">2月</option>
+                <option value="3">3月</option>
+                <option value="4">4月</option>
+                <option value="5">5月</option>
+                <option value="6">6月</option>
+                <option value="7">7月</option>
+                <option value="8">8月</option>
+                <option value="9">9月</option>
+                <option value="10">10月</option>
+                <option value="10">10月</option>
+                <option value="12">12月</option>
+            </select>
+        </div>
+    </div>
+    <if condition="$Think.session.userRole elt 4">
+    <div class='span4'>
+        <div class='row-fluid'>
+            <strong>学生院系</strong>
+            <select class='select2 input-block-level' name='scollege'>
+                <option value='-1' />------请选择------
+                <volist name="scollege" id="vo5">
+                    <option value="{$vo5.college}">{$vo5.college}</option>
+                </volist>
+            </select>
+        </div>
+    </div>
+    </if>
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>领导</strong>
+            <select class='select2 input-block-level' name='lname'>
+                <option value='-1' />------请选择------
+                <volist name="lname" id="vo6">
+                    <option value="{$vo6.lname}">{$vo6.lname}</option>
+                </volist>
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-defalut pull-right" style="margin:17px 194px 0px 0px;" type="submit">检索 | Search</button>
+    </div>
+    </div>
+    </if>
+    <if condition="($Think.session.userRole egt 2) and ($Think.session.userRole elt 4)">
+        <div id="search">
+    <div class='row-fluid'>
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>课程名称</strong>
+            <input class='input-block-level' name="cname" type="text" />
+        </div>
+    </div>
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>教师名称</strong>
+            <input class='input-block-level' name="teaname" type="text" />
+        </div>
+    </div>
+    <if condition="$Think.session.userRole elt 4">
+    <div class='span4'>
+        <div class='row-fluid'>
+            <strong>教师单位</strong>
+            <select class='select2 input-block-level' name='tcollege'>
+                <option value='-1' />------请选择------
+                <volist name="tcollege" id="vo3">
+                    <option value="{$vo3.college}">{$vo3.college}</option>
+                </volist>
+            </select>
+        </div>
+    </div>
+    </if>
+    </div>
+
+    <div class='row-fluid' style="margin-top:10px; margin-bottom:2px;">
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>听课月份</strong>
+            <select class='select2 input-block-level' name='tkmonth'>
+                <option value='-1' />------请选择------
+                <option value="1">1月</option>
+                <option value="2">2月</option>
+                <option value="3">3月</option>
+                <option value="4">4月</option>
+                <option value="5">5月</option>
+                <option value="6">6月</option>
+                <option value="7">7月</option>
+                <option value="8">8月</option>
+                <option value="9">9月</option>
+                <option value="10">10月</option>
+                <option value="10">10月</option>
+                <option value="12">12月</option>
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-defalut pull-right" style="margin:17px 194px 0px 0px;" type="submit">检索 | Search</button>
+    </div>
+    </div>
+       <!-- <input type="hidden" name="flag" value=1 />
+        <button class="btn btn-large btn-success" type="submit" style="margin:0px 0px 5px 20px;">查看本组听课记录</button> -->
+    </if>
+    </form>
+</div>
+
+<div class='row-fluid'>
+<div class='span12 box bordered-box green-border' style='margin-bottom:0;'>
+<div class='box-header green-background'>
+    <div class='text-center'>
+        听课任务列表
+    </div>   
+</div>
+<div class='box-content box-no-padding'>
+    <div class='responsive-table'>
+        <div class='scrollable-area'>
+            <table class='table table-bordered table-hover table-striped' style='margin-bottom:0;'>
+                <thead>
+                <tr>
+                    <td><strong>上课周次</strong></td>
+                    <td><strong>上课时间</strong></td>
+                    <td><strong>上课地点</strong></td>
+                    <td><strong>课程名称</strong></td>
+                    <td><strong>教师姓名</strong></td>
+                    <td><strong>教师单位</strong></td>
+                    <!-- <td><strong>学生院系</strong></td> -->
+                    <td><strong>课程类别</strong></td>                   
+                    <td><strong>听课时间</strong></td>
+                    <td><strong>培养层次</strong></td>
+                    <td><strong>听课领导</strong></td>
+                    <td style="text-align:center;"><strong>审核状态</strong></td>
+                    <td><strong>听课记录</strong></td>
+                    <if condition="$Think.session.userRole eq 1">
+                    <td><strong>修改任务</strong></td>
+                    </if>
+                    <td><strong>填写记录</strong></td>
+                    <td><strong>删除任务</strong></td>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name='tlist' id='vo1'>
+                    <tr>
+                        <td>{$vo1.week}</td>
+                        <td>{$vo1.ctime}</td>
+                        <td>{$vo1.cplace}</td>
+                        <td>{$vo1.cname}</td>
+                        <td>{$vo1.tname}</td>
+                        <td>{$vo1.tcollege}</td>                        
+                        <!-- <td>{$vo1.scollege}</td> -->
+                        <td>{$vo1.category1}&nbsp;|&nbsp;{$vo1.category2}</td>
+                        <td>{$vo1.tktime}</td>
+                        <td style="text-align:center;">
+                          <if condition="$vo1['pycc'] eq 1">
+                            本科
+                          <else/>研究生
+                        </if>
+                        </td>
+                        <td style="text-align:center;">
+                            <!-- <a class='btn' data-toggle='modal' href='#editLd' role='button'>{$vo1.lname}</a> -->
+                            {$vo1.lname}
+                        </td>
+                        <td style="text-align:center;">  
+                            <if condition="$vo1['pass'] neq 1">
+                                待审核
+                            <else />已通过
+                            </if>                    
+                        </td>
+                        <if condition="($vo1['record'] eq 1) and ($vo1['save'] eq 0)" >
+                            <td>已保存记录请及时提交</td>
+                            <elseif condition="($vo1['record'] eq 1) and ($vo1['save'] eq 1)" /><td>已填写记录</td>
+                            <else /><td>未填写记录</td>
+                        </if>
+                        <if condition="$Think.session.userRole eq 1">
+                        <td>
+                            <div class='text-center'>
+                                <if condition="$vo1['record'] eq 0">
+                                    <a class='btn btn-warning btn-mini' href="{:U('Task/taskinfo',array('tid'=>$vo1['tid']))}">
+                                        修改
+                                    </a>
+                                <else />
+                                    无法修改
+                                </if>
+                            </div>
+                        </td>
+                        </if>
+                        <td>
+                            <div class='text-center'>
+                                <if condition="$Think.session.userRole eq 1">
+                                    <if condition="$vo1['record'] eq 0">
+                                        <a class='btn btn-success btn-mini' href="{:U('Task/addRecordT',array('tid'=>$vo1['tid']))}">
+                                            填写
+                                        </a>
+                                    <else />
+                                        <a class='btn btn-primary btn-mini' href="{:U('Task/editRecordT',array('tid'=>$vo1['tid']))}">
+                                            修改
+                                        </a>
+                                    </if>
+                                <else />
+                                    <if condition="$vo1['pass'] eq 1">
+                                        <a class='btn btn-default btn-mini' href="{:U('Record/viewRecord',array('tid'=>$vo1['tid']))}">
+                                                查看
+                                        </a>
+                                    <else />
+                                        <if condition="$Think.session.userName eq $vo1['lname']">
+                                            <if condition="$vo1['record'] eq 0">
+                                                <a class='btn btn-success btn-mini' href="{:U('Task/addRecordT',array('tid'=>$vo1['tid']))}">
+                                                    填写
+                                                </a>
+                                            <else />
+                                                <a class='btn btn-primary btn-mini' href="{:U('Task/editRecordT',array('tid'=>$vo1['tid']))}">
+                                                    修改
+                                                </a>
+                                            </if>
+                                        <else />
+                                            <a class='btn btn-default btn-mini' href="{:U('Record/viewRecord',array('tid'=>$vo1['tid']))}">
+                                                查看
+                                            </a>
+                                        </if>
+                                    </if>
+                                </if>
+                            </div>
+                        </td>
+                        <if condition="(($Think.session.userRole eq 1) and ($vo1['record'] eq 0)) or (($Think.session.userRole eq 1) and ($vo1['save'] eq 0))">
+                        <td>
+                            <div class='text-center'>
+                                <a class='btn btn-danger btn-mini' href="javascript:if(confirm('确实要删除吗?'))location='{:U('Task/delTask',array('tid'=>$vo1['tid']))}'">
+                                    <i class='icon-remove'></i>
+                                </a>
+                            </div>
+                        </td>
+                        <elseif condition="($Think.session.userRole eq 2) and ($vo1['save'] eq 0)"/>
+                        <td>
+                            <div class='text-center'>
+                                <a class='btn btn-danger btn-mini' href="javascript:if(confirm('确实要删除吗?'))location='{:U('Task/delTaskLd',array('tid'=>$vo1['tid']))}'">
+                                    <i class='icon-remove'></i>
+                                </a>
+                            </div>
+                        </td>
+                        </if>
+                    </tr>
+    
+    <div class='modal hide fade' id='editLd' role='dialog' tabindex='-1'>
+        <div class='modal-header'>
+        <button class='close' data-dismiss='modal' type='button'>&times;</button>
+            <h3>修改听课专家[领导]</h3>
+        </div>
+        <div class='modal-body'> 
+            <ul class="nav nav-list">
+                <strong>
+                    <div class="text-center pull-left" style="width:65px;">姓名&nbsp;</div><div class="text-center pull-left" style="width:55px;">职称&nbsp;</div><div class="text-center pull-left" style="width:100px;">手机&nbsp;</div><div class="pull-left" style="width:280px;">所在院系</div>
+                </strong>
+                    <hr style="margin:5px;"/>
+                <volist  name="ld" id="vo2">
+                    <div style="clear:both; float:none;"></div>
+                    <li>
+                        <a href="{:U('Task/editTaskld',array('tid'=>$vo1['tid'],'lid'=>$vo2['lid']))}" style="height:20px;">
+                        <div class="text-center pull-left" style="width:65px;">{$vo2.name}&nbsp;</div>
+                        <div class="text-center pull-left" style="width:55px;">{$vo2.title}&nbsp;</div>
+                        <div class="text-center pull-left" style="width:100px;">{$vo2.mobi}&nbsp;</div>
+                        <div class="pull-left" style="width:280px;">{$vo2.college}</div>
+                    </a><hr style="margin:5px;"/></li>
+                </volist>
+            </ul>                     
+        </div>
+        <div class='modal-footer'>
+            <!--button class='btn btn-primary' type='submit'>添加</button-->
+            <button class='btn' data-dismiss='modal'>关闭</button>
+        </div>
+        <!--/form-->
+    </div>
+
+                </volist>
+                </tbody>
+            </table>
+            <div class="pagination" style="margin: auto; width:725px;">{$page}</div>
+        </div>
+    </div>
+</div>
+</div>
+</div>      
+</div>
+</div>
+</div>
+</section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#tmanager").nav_slide('tmanager','showTask');
+        $(".edittime").change(function(){
+            alert('ding!');
+            var p = [];
+            p.tktime = $(this).val();
+            p.tid = $(this).attr('myid');
+            var url = "__URL__/editTasktime";
+            $.post(url,p,function(e){
+                if(e.code == "0"){
+                    alert(e.message);
+                }
+            });
+
+        });
+    });
+</script>  
+<include file="./jwcld/Tpl/footerTemp.html" />

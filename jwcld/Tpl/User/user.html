@@ -1,0 +1,237 @@
+<include file="./jwcld/Tpl/headerTemp.html" />
+<section id='content'>
+    <div class='container-fluid'>
+        <div class='row-fluid' id='content-wrapper'>
+        <div class='span12'>
+            <div class='row-fluid'>
+                <div class='span6'>
+                    <div class='page-header'>
+                        <h1 class='pull-left'>
+                            <i class='icon-user'></i>
+                            <span>人员管理-系统用户</span>
+                        </h1>
+                    </div>
+                </div>
+                <div class="span3 pull-right">
+                    <a class='btn btn-success' style='margin-top:30px;' href="{:U('User/add_user')}">
+                        <i class='icon-plus'>&nbsp;&nbsp;<strong>添加新用户</strong></i>
+                    </a>
+                </div>
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box orange-border' style='margin-bottom:0;'>
+                        <div class='box-header green-background'>
+                            <div class='text-center'>系统用户信息</div>
+                        </div>
+                    <div class='box-content box-no-padding'>
+                        <div class='responsive-table'>
+                            <div class='scrollable-area'>
+                                <form id="form1" action="{:U('User/user')}" method="post" class="form-inline pull-right" style="margin:10px;">
+                                    <input type="text" name="name" class="input-medium" placeholder="姓名">
+                                    <input type="text" name="teaid" class="input-medium" placeholder="职工证号">
+                                    <button type="submit" class="btn">检索</button>
+                                </form>
+                                <table class='table table-bordered table-hover table-striped' style='margin-bottom:0;'>
+                                <thead>
+                                <tr>
+                                    <td><strong>用户角色</strong></td>    
+                                    <td><strong>工作证号</strong></td>
+                                    <td><strong>用户姓名</strong></td>
+                                    <td><strong>职称</strong></td>
+                                    <td><strong>领导职务</strong></td>
+                                    <td><strong>机构/院系</strong></td>
+                                    <td><strong>编辑&nbsp;&nbsp;删除</strong></td>
+                                    <!-- <td><strong>菜单操作</strong></td> -->
+                                </tr>
+                                </thead>
+                                <tbody>
+								<volist name="userList" id="vo1">
+                                <tr>
+                                    <td>{$vo1.role}</td>   
+                                    <td>{$vo1.teaid}</td>
+                                    <td>{$vo1.name}</td>
+                                    <td>{$vo1.title}</td>
+                                    <td>{$vo1.pos}</td>
+                                    <td>{$vo1.college}</td>
+
+                                    <td>
+                                        <a class='btn btn-success btn-mini' href="{:U('User/user_info',array('uid'=>$vo1['uid'],'flag'=>0))}" style='margin-right:10px;'>
+                                            <i class='icon-edit'></i>
+                                        </a>
+                                        <a class='btn btn-danger btn-mini' href="{:U('User/user_delete',array('uid'=>$vo1['uid']))}">
+                                            <i class='icon-remove'></i>
+                                        </a>
+                                    </td>
+                                    <!-- <td>
+                                        <button class='btn btn-default btn-mini manageMenu' uid="{$vo1['uid']}">
+                                            <i class='icon-check-sign'>&nbsp;&nbsp;<strong>管理</strong></i>
+                                        </button>
+                                    </td> -->
+                                </tr>
+								</volist>
+                                </tbody>
+                                </table>
+                                <div class="pagination" style="margin: auto; width:725px;">{$page}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        </div>
+    </div>
+<!-- <div class='modal hide fade' id='menus' role='dialog' tabindex='-1' style="width:800px; margin-left: -380px;">
+    <div class='modal-header'>
+        <button class='close' data-dismiss='modal' type='button'>&times;</button>
+        <h3>菜单管理 可给选中的用户分配菜单权限</h3>
+    </div> 
+    <form class='form form-horizontal' style='margin: 0;' enctype="multipart/form-data" method="post" action="#">
+        <div class='modal-body'>
+            <div class='control-group'>
+                <label class='control-label'><strong>菜单选项</strong></label>
+                <div class='controls'>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="1" name="menuId1" />&nbsp;<span style="color: #ff0000;">首页管理</span>
+                    </label>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="11" name="menuId1" />&nbsp;通知|简报
+                    </label>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="12" name="menuId1" />&nbsp;督导介绍
+                    </label>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="13" name="menuId1" />&nbsp;数据下载|更新
+                    </label>
+                    <hr style="margin:5px 0px 0px 0px;" />
+                </div>
+
+                 <div class='controls'>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="2" name="menuId2" />&nbsp;<span style="color: #ff0000;">人员管理</span>
+                    </label>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="21" name="menuId2" />&nbsp;系统用户
+                    </label>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="22" name="menuId2" />&nbsp;督导用户
+                    </label>
+                    <hr style="margin:5px 0px 0px 0px;" />
+                </div>
+                 <div class='controls'>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="3" name="menuId3" />&nbsp;<span style="color: #ff0000;">听课任务</span>
+                    </label>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="31" name="menuId3" />&nbsp;分配
+                    </label>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="32" name="menuId3" />&nbsp;查看
+                    </label>
+                    <hr style="margin:5px 0px 0px 0px;" />
+                </div>
+                 <div class='controls'>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="4" name="menuId4" />&nbsp;<span style="color: #ff0000;">听课记录</span>
+                    </label>
+                    <hr style="margin:5px 0px 0px 0px;" />
+                </div>
+                 <div class='controls'>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="5" name="menuId5" />&nbsp;<span style="color: #ff0000;">数据报表</span>
+                    </label>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="51" name="menuId5" />&nbsp;数据检索
+                    </label>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="52" name="menuId5" />&nbsp;按院系统计
+                    </label>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="53" name="menuId5" />&nbsp;按院系月份统计
+                    </label>
+                </div>
+                <div class='controls' style="padding-left: 94px;">
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="54" name="menuId5" />&nbsp;按督导统计
+                    </label>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="55" name="menuId5" />&nbsp;按教师职称统计
+                    </label>
+                    <label class="checkbox inline">
+                          <input type='checkbox' class="menu_manage" value="56" name="menuId5" />&nbsp;按课程名统计
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class='modal-footer'>
+            <button class='btn btn-primary' type="button" uid="-1" id="assignMenu">分配</button>
+            <button class='btn' data-dismiss='modal'>关闭</button>
+        </div>
+    </form>
+</div> -->
+</section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#umanager').nav_slide('umanager','user');
+        /*$('.manageMenu').click(function(){
+            $('#assignMenu').attr("uid",$(this).attr("uid"));
+            $('#menus').modal({backdrop: 'static', keyboard: false});
+        });*/
+        $('.menu_manage').click(function(){
+            var value = $(this).val();
+            var exp = $(this).attr("checked");
+            if(value > 0 && value < 10){
+                if(typeof(exp) == "undefined"){
+                    $("input[name='menuId"+value+"']").attr("checked",false);
+                }else{
+                    $("input[name='menuId"+value+"']").attr("checked",true);
+                }
+            }else{
+                var first = parseInt(value/10);
+                if(typeof(exp) != "undefined"){
+                    $("input[value='"+first+"']").attr("checked",true);
+                }else{
+                    var last = true;
+                    $("input[name='menuId"+first+"']").each(function(){
+                        var subexp = $(this).attr("checked");
+                        if($(this).val() != first && typeof(subexp) != "undefined"){
+                            last = false;
+                            return;
+                        }
+                    });
+                    if(last){
+                        $("input[value='"+first+"']").attr("checked",false);
+                    }
+                }
+            }
+        });
+       /* $('#assignMenu').click(function(){
+            var uid = $(this).attr('uid');
+            var mids = "";
+            var first = true;
+            $("input[type='checkbox']").each(function(){
+                var exp = $(this).attr("checked");
+                if(typeof(exp) != "undefined"){
+                    if(first){
+                        mids = $(this).val();
+                        first = false;
+                    }else{
+                        mids += ","+$(this).val();
+                    }
+                }
+            });
+            var p = {};
+            var url = "__URL__/assignMenu";
+            p.uid = uid;
+            p.mids = mids;
+            $.post(url,p,function(e){
+                if(e.code == '1'){
+                    $("input[type='checkbox']").attr('checked',false);
+                    alert(e.message);
+                }else{
+                    alert(e.message);
+                }
+            });
+            return false;
+        });*/
+    });
+</script>
+<include file="./jwcld/Tpl/footerTemp.html" />

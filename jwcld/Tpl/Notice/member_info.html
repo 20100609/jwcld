@@ -1,0 +1,31 @@
+<include file="./jwcld/Tpl/noticeHeader.html" />
+	<div class="context-warrp"><!--整个内容部分-->
+        <div class="column-rows"><!--第一行内容-->
+        	<div class="member" style="margin: auto; font-size: 16px; line-height: 30px;">
+        		<empty name="data">
+        			<p>没有该领导的简介信息，我们会及时更新</p>
+        		<else />
+	        		<p style="text-align: center; margin-top: 20px; font-size: 18px;"><b>领导成员{$data['name']}的简介</b></p>
+	        		<hr>
+					<div class="content" style="padding-left: 10px;">
+						<p class="intro_content">
+							<span><strong>姓名:&nbsp;</strong>{$data['name']}</span>
+						</p>
+						<p class="intro_content">
+							<span><strong>职称:&nbsp;</strong>{$data['title']}</span>
+						</p>
+						<p class="intro_content">
+							<span><strong>院系/单位:&nbsp;</strong>{$data['college']}</span>
+						</p>
+						<p class="intro_content">
+							<span><strong>职务:&nbsp;</strong>{$data['pos']}</span>
+						</p>
+						<p class="intro_content">
+							<span><strong>领导简介:&nbsp;</strong>{$data['intro']}</span>
+						</p>
+					</div>
+				</empty>
+        	</div>
+        </div>
+    </div>
+<include file="./jwcld/Tpl/noticeFooter.html" />

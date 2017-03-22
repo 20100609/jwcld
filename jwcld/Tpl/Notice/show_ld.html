@@ -1,0 +1,86 @@
+<include file="./jwcld/Tpl/headerTemp.html" />
+<section id='content'>
+    <div class='container-fluid'>
+        <div class='row-fluid' id='content-wrapper'>
+        <div class='span12'>
+            <div class='row-fluid'>
+                <div class='span6'>
+                    <div class='page-header'>
+                        <h1 class='pull-left'>
+                            <i class='icon-dashboard'></i>
+                            <span>领导介绍管理</span>
+                        </h1>
+                    </div>
+                </div>
+                <div class="span2 pull-right">
+                    <a class='btn btn-success' style='margin-top:30px;' href="{:U('Notice/add_ld')}">
+                        <i class='icon-plus'>&nbsp;&nbsp;<strong>添加领导介绍</strong></i>
+                    </a>
+                </div>
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box orange-border' style='margin-bottom:0;'>
+                        <div class='box-header green-background'>
+                            <div class='text-center'>领导介绍信息</div>
+                        </div>
+                    <div class='box-content box-no-padding'>
+                        <div class='responsive-table'>
+                            <div class='scrollable-area'>
+                                <table class='table table-bordered table-striped' style='margin-bottom:0;'>
+                                <thead>
+                                <tr>
+                                    <td><strong>序号</strong></td>    
+                                    <td><strong>领导姓名</strong></td>
+                                    <td><strong>工作证号</strong></td>
+                                    <td><strong>院系/单位</strong></td>
+                                    <td><strong>入系统时间</strong></td>
+                                    <td><strong>发布者</strong></td>
+                                    <td><strong>编辑&nbsp;|&nbsp;删除</strong></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+								<volist name="noticeList" id="vo" key="i">
+                                <tr>
+                                    <td>{$i}</td>   
+                                    <td>{$vo.name}</td>
+                                    <td>{$vo.teaid}</td>
+                                    <td>{$vo.college}</td>
+                                    <td>{$vo.date}</td>
+                                    <td>{$vo.uname}</td>
+                                    <td>
+                                        <div class='text-left'>
+                                            <a class='btn btn-success btn-mini' href="{:U('Notice/ld_info',array('id'=>$vo['iid']))}" style='margin-right:10px;'>
+                                                <i class='icon-edit'></i>
+                                            </a>
+                                            <button class='btn btn-danger btn-mini' href="{:U('Notice/ld_delete',array('id'=>$vo['iid']))}" id="remove">
+                                                <i class='icon-remove'></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+								</volist>
+                                </tbody>
+                                </table>
+                                <div class="pagination" style="margin: auto; width: 750px;">{$page}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#unotice').nav_slide('unotice','show_dd');
+        $('#remove').click(function(){
+            var r = confirm("确定删除该通知吗？");
+            if(r == true){
+                location.href = $(this).attr('href');
+            }else{
+                return false;
+            }
+        });
+    });
+</script>
+<include file="./jwcld/Tpl/footerTemp.html" />

@@ -1,0 +1,60 @@
+#stats-chart1,#stats-chart2,#stats-chart3,#stats-chart7,#stats-chart8{height:200px}
+.color-settings .color-title{font-weight:bold;padding-left:10px}
+.box-nomargin{margin-bottom:20px}@media screen and (min-width:768px){.box-nomargin{margin-bottom:0}}
+.wysihtml5-sandbox{box-sizing:border-box}
+
+@media only screen and (max-width: 800px) {
+#no-more-tables table, 
+#no-more-tables thead, 
+#no-more-tables tbody, 
+#no-more-tables th, 
+#no-more-tables td, 
+#no-more-tables tr { 
+	display: block; 
+}
+
+/* Hide table headers (but not display: none;, for accessibility) */
+#no-more-tables thead tr { 
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+
+#no-more-tables tr { border: 1px solid #ccc; }
+
+#no-more-tables td { 
+	/* Behave  like a "row" */
+	border: none;
+	border-bottom: 1px solid #eee; 
+	position: relative;
+	padding-left: 50%; 
+	white-space: normal;
+	text-align:left;
+}
+
+#no-more-tables td:before { 
+	/* Now like a table header */
+	position: absolute;
+	/* Top/left values mimic padding */
+	top: 6px;
+	left: 6px;
+	width: 45%; 
+	padding-right: 10px; 
+	white-space: nowrap;
+	text-align:left;
+	font-weight: bold;
+}
+
+/*
+Label the data
+*/
+#no-more-tables td:before { content: attr(data-title); }
+}
+
+.error {
+	display: block;
+    overflow: hidden;
+    padding: 0 8px 0 0;
+    position: relative;
+    color:red;
+}

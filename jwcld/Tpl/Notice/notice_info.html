@@ -1,0 +1,95 @@
+<include file="./jwcld/Tpl/headerTemp.html" />
+<section id='content'>
+    <div class='container-fluid'>
+        <div class='row-fluid' id='content-wrapper'>
+        <div class='span12'>
+            <div class='row-fluid'>
+                <div class='span6'>
+                    <div class='page-header'>
+                        <h1 class='pull-left'>
+                            <i class='icon-user'></i>
+                            <span>通知管理-编辑通知</span>
+                        </h1>
+                    </div>
+                </div>  
+                <div class='row-fluid'>
+                    <div class='span12 box'>
+                        <div class='box-header green-background'>
+                            <div class='title'>
+                                <div class='icon-edit'></div>
+                                    通知信息
+                            </div>
+                        </div>
+                        <div class='box-content'>
+                            <form accept-charset="UTF-8" action="{:U('Notice/save_notice')}" class="form form-horizontal" method="post" style="margin-bottom: 0;" />
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputTitle'>标题</label>
+                                    <div class='controls'>
+                                        <input id='inputTitle' type='text' name='title' style="width: 680px;" value="{$notice_data['title']}" />
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputSeq'>批号</label>
+                                    <div class='controls'>
+                                        <input id='inputSeq' type='text' name='seq' style="width: 680px;" value="{$notice_data['seq']}" />
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputContent'>内容</label>
+                                    <div class='controls'>
+                                        <textarea name="content" style="width: 700px; height: 400px;"></textarea>
+                                    </div>
+                                </div>
+                                <div class='form-actions'>
+                                    <button class='btn btn-primary' type='button' id="subBtn">
+                                        <i class='icon-save'></i>
+                                        更新
+                                    </button>
+                                    <a class='btn' type='submit' href="{:U('Notice/show_notice')}">取消</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            var editor;
+            KindEditor.ready(function (K){
+                editor = K.create('textarea[name="content"]',{
+                    allowFileManager : true
+                });
+                editor.html('{$notice_data['content']}');
+            });
+            $('#subBtn').click(function(){
+                var title = $('#inputTitle').val();
+                var seq = $('#inputSeq').val();
+                var url = '__URL__/save_notice';
+                var p = {};
+                if("" == title || editor.text() == ""){
+                    alert("请填写标题或者主题内容");
+                    return false;
+                }else{
+                    p.flag = 1;
+                    p.title = title;
+                    p.seq = seq;
+                    p.content = editor.html().replace(/[\r\n]/g,"");
+                    p.id = {$notice_data['id']};
+                    $.post(url,p,function(e){
+                        if(e.code == '1'){
+                            alert("更新成功");
+                            location.href = "__URL__/show_notice";
+                        }else{
+                            alert("更新失败");
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
+</section>
+<include file="./jwcld/Tpl/footerTemp.html" />

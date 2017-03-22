@@ -1,0 +1,116 @@
+<include file="./jwcld/Tpl/headerTemp.html" />
+<section id='content'>
+    <div class='container-fluid'>
+        <div class='row-fluid' id='content-wrapper'>
+        <div class='span12'>
+            <div class='row-fluid'>
+                <div class='span6'>
+                    <div class='page-header'>
+                        <h1 class='pull-left'>
+                            <i class='icon-user'></i>
+                            <span>人员管理-添加新用户</span>
+                        </h1>
+                    </div>
+                </div>  
+                <div class='row-fluid'>
+                    <div class='span12 box'>
+                        <div class='box-header green-background'>
+                            <div class='title'>
+                                <div class='icon-edit'></div>
+                                新用户信息
+                            </div>
+                        </div>
+                        <div class='box-content'>
+                            <form accept-charset="UTF-8" action="{:U('User/addUser')}" class="form form-horizontal" method="post" style="margin-bottom: 0;" />
+							<div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="CFC7d00LWKQsSahRqsfD+e/mHLqbaVIXBvlBGe/KP+I=" /></div>
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputSelect'>用户角色</label>
+                                    <div class='controls'>
+                                        <select id='inputSelect' name="role">
+                                            <option value="-1">请选择用户角色</option>
+                                            <option value="1">系统管理员</option>
+                                            <option value="2">学校领导</option>
+                                            <option value="3">部门领导</option>
+                                            <option value="4">学院领导</option>
+                                            <option value="5">教师</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputNumber'>工作证号</label>
+                                    <div class='controls'>
+                                        <input id='inputNumber' type='text' name='teaid' value='' />
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>用户姓名</label>
+                                    <div class='controls'>
+                                        <input id='inputText1' type='text' name='name' value='' />
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>职称（可选）</label>
+                                    <div class='controls'>
+                                        <input id='inputText1' type='text' name='title' value='' />
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <label class='control-label' for='tcollege'>院系/机构</label>
+                                    <div class='controls'>
+                                        <select class='select2 input-xlarge' name="college" id="tcollege">
+                                            <option value='-1' selected="selected"/>------请选择------
+                                        <volist name="college" id="vo">
+                                            <option value="{$vo.college}">{$vo.college}</option>
+                                        </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>*领导职务</label>
+                                    <div class='controls'>
+                                        <select id="inputText2" name='pos'>
+                                            <option value="-1" selected="selected">**非领导用户请跳过**</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class='form-actions'>
+                                    <button class='btn btn-primary' type='submit'>
+                                        <i class='icon-save'></i>
+                                        确定
+                                    </button>
+                                    <a class='btn' type='submit' href="{:U('User/user')}">取消</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#umanager').nav_slide('umanager','user');
+        $('#inputSelect').change(function(){
+            var value = $(this).val();
+            if( value == 2 ){
+                $('#inputText2').empty();
+                $('#inputText2').append('<option value="校长" selected="selected">校长</option><option value="副校长">副校长</option><option value="书记">书记</option><option value="副书记">副书记</option><option value="校长助理">校长助理</option><option value="常务副校长">常务副校长</option>');
+            }
+            else if(value == 3){
+                $('#inputText2').empty();
+                $('#inputText2').append('<option value="处长" selected="selected">处长</option><option value="副处长">副处长</option><option value="主任">主任</option><option value="副主任">副主任</option><option value="部长">部长</option><option value="副部长">副部长</option><option value="书记">书记</option><option value="副书记">副书记</option>');
+            }
+            else if(value == 4){
+                $('#inputText2').empty();
+                $('#inputText2').append('<option value="院长" selected="selected">院长</option><option value="副院长">副院长</option><option value="书记">书记</option><option value="副书记">副书记</option><option value="系主任">系主任</option><option value="副系主任">副系主任</option><option value="部长（教育学部）">部长（教育学部）</option><option value="副部长（教育学部）">副部长（教育学部）</option>');
+            }
+            else{
+                $('#inputText2').empty();
+                $('#inputText2').append('<option value="-1" selected="selected">**非领导用户请跳过**</option>');
+            }
+        });
+    });
+</script>
+<include file="./jwcld/Tpl/footerTemp.html" />

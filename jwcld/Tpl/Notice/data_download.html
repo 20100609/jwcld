@@ -1,0 +1,135 @@
+<include file="./jwcld/Tpl/headerTemp.html" />
+<section id='content'>
+<div class='container-fluid'>
+    <div class='row-fluid' id='content-wrapper'>
+        <div class='span12'>
+            <div class='row-fluid'>
+                <div class='span12'>
+                    <div class='page-header'>
+                        <h1 class='pull-left'>
+                            <i class='icon-dashboard'></i>
+                            <span>数据下载&nbsp;|&nbsp;数据更新</span>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class='row-fluid'>
+                <div class="span12" style="margin-top: 30px;">
+                    <div class="span1"></div>
+                    <div class="span1" style="margin-right: 95px;">
+                        <select id="yterm" style="width: 195px; height:40px; margin-top: 3px;">
+                            <option value='-1' selected="selected"/>---请选择学年学期---
+                            <volist name="yt" id="vo">
+                                <option value="{$vo.value}">{$vo.item}</option>
+                            </volist>
+                        </select>
+                    </div>
+                    <div class="span3" id="course_download">
+                        <buton class="btn btn-success btn-large btn-block">课程数据下载&nbsp;|&nbsp;更新</button>
+                    </div>
+                    <div class="span3" id="staff_download">
+                        <buton class="btn btn-success btn-large btn-block">职工数据下载&nbsp;|&nbsp;更新</button>
+                    </div>
+                </div>
+                <div class="span12" style="margin-top: 30px;">
+                    <div class="span1"></div>
+                    <div class="span6" style="line-height: 30px;">
+                        <p><strong style="color: #ff0000; font-size: 16px;">温馨提示：</strong></p>
+                        <p>
+                            <strong>课程数据下载&nbsp;|&nbsp;更新:&nbsp;&nbsp;</strong>
+                            <span style="color:red"><strong>请先选择学年学期</strong></span>,该数据将从公共资源服务中心平台下载课程数据，如果该门课程数据在本地数据库中已有，将更新本地数据，如果没有，将新增数据。
+                        </p>
+                        <p>
+                            <strong>职工数据下载&nbsp;|&nbsp;更新:&nbsp;&nbsp;</strong>
+                            <span style="color:red"><strong>不需要选择学年学期</strong></span>,该数据将从信息网络中心平台下载职工数据，如果该职工数据在本地数据库中已有，将更新本地数据，如果没有，将新增数据。
+                        </p>
+                        <p>
+                            <span style="color:red;"><strong>*请注意</strong></span>:&nbsp;&nbsp;不要频繁的更新数据，因为每次更新数据需要一段时间。并且建议更新数据的时间点选在凌晨，可以尽量降低对系统用户的影响。
+                        </p>
+                    </div>
+                </div>   
+            </div>        
+        </div>
+    </div>
+</div>
+<div class='modal hide fade' id='download_info' role='dialog' tabindex='-1'>
+    <div class='modal-header'>
+       <!-- <button class='close' data-dismiss='modal' type='button'>&times;</button> -->
+        <h3><strong>数据下载&nbsp;|&nbsp;更新</strong></h3>
+    </div> 
+    <div class='modal-body' style="text-align: center;">
+        <img src="/jwcld/Public/images/loading.gif">
+        <p style="margin-top: 10px;">
+            数据正在下载更新中，可能会耗费一定时间（约十分钟），请不要关闭网页。
+        </p>
+        <p style="margin-top: 30px;">
+            <strong><span id="message" style="color: #ff0000; font-size: 16px;"></span></strong>
+        </p>
+    </div>
+    <div class='modal-footer'>
+        <div id="data_close" style="display: none;">
+            <button class='btn' data-dismiss='modal'>关闭</button>
+        </div>
+    </div>
+</div>
+</section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#unotice').nav_slide('unotice','data_download');
+        $('#course_download').click(function(){
+            var param = {};
+            param.year = $("#yterm").val();
+            if(param.year == -1){
+                alert("请选择学年学期");
+                return false;
+            }
+            $('#download_info').modal({backdrop: 'static', keyboard: false});
+            $.ajax({
+                url:'__URL__/download_course',
+                data:param,
+                type:'post',
+                cache:false,
+                dataType:'json',
+                success:function(data){
+                    if (data.code == '1') {
+                        $('#message').html(data.msg);
+                        $('#data_close').css("display","block");
+                    }else {
+                        $('#message').html(data.msg);
+                        $('#data_close').css("display","block");
+                    }
+                },
+                error:function() {
+                    $('#message').html("出现错误，请重新加载页面后再尝试");
+                    $('#data_close').css("display","block");
+                }
+            });
+        });
+
+        $('#staff_download').click(function(){
+            $('#download_info').modal({backdrop: 'static', keyboard: false});
+            $.ajax({
+                url:'__URL__/staff_download',
+                data:{},
+                type:'post',
+                cache:false,
+                dataType:'json',
+                success:function(data){
+                    if (data.code == '1') {
+                        $('#message').html(data.msg);
+                        $('#data_close').css("display","block");
+                    }else {
+                        $('#message').html(data.msg);
+                        $('#data_close').css("display","block");
+                    }
+                },
+                error:function() {
+                    $('#message').html("出现错误，请重新加载页面后再尝试");
+                    $('#data_close').css("display","block");
+                }
+            });
+        });
+        
+    });
+</script>
+<include file="./jwcld/Tpl/footerTemp.html" />

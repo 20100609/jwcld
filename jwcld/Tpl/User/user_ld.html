@@ -1,0 +1,154 @@
+<include file="./jwcld/Tpl/headerTemp.html" />
+<section id='content'>
+    <div class='container-fluid'>
+        <div class='row-fluid' id='content-wrapper'>
+        <div class='span12'>
+            <div class='row-fluid'>
+                <div class='span6'>
+                    <div class='page-header'>
+                        <h1 class='pull-left'>
+                            <i class='icon-user'></i>
+                            <span>人员管理-领导用户</span>
+                        </h1>
+                    </div>
+                </div>
+                <div class="span2 pull-right">
+                    <a class='btn btn-success' style='margin-top:30px;' data-toggle='modal' href='#selDd' role='button' id='selbtn'>
+                        <i class='icon-plus'>&nbsp;&nbsp;<strong>选择本学期听课领导</strong></i>
+                    </a>
+                </div> 
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box orange-border' style='margin-bottom:0;'>
+                        <div class='box-header green-background'>
+                            <div class='text-center'>本学期听课领导用户信息</div>
+                        </div>
+                        <div class='box-content box-no-padding'>
+                            <div class='responsive-table'>
+                            <div class='scrollable-area'>
+                                <table class='table table-bordered table-striped table-hover' style='margin-bottom:0;'>
+                                <thead>
+                                <tr>  
+                                    <td><strong>工作证号</strong></td>
+                                    <td><strong>领导姓名</strong></td>
+                                    <td><strong>职称</strong></td>
+                                    <td><strong>单位</strong></td>
+                                    <td><strong>职务</strong></td>
+                                    <td><strong>组别</strong></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+								<volist name="ldinfo" id="vo1">
+                                <tr>
+                                    <td>{$vo1.teaid}</td>
+                                    <td>{$vo1.name}</td>
+                                    <td>{$vo1.title}</td>
+                                    <td>{$vo1.college}</td>
+                                    <td>{$vo1.pos}</td>
+                                    <td>
+                                        <if condition="$vo1.role eq 2">
+                                            学校领导
+                                        <elseif condition="$vo1.role eq 3"/>
+                                            部门领导
+                                        <else />
+                                            院系领导
+                                        </if>
+                                    </td>
+                                    <td>
+                                        <div class='text-right'>
+                                            <a class='btn btn-success btn-mini' href="{:U('User/user_info',array('uid'=>$vo1['uid'],'flag'=>1))}" style='margin-right:10px;'>
+                                                <i class='icon-edit'></i>
+                                            </a>
+                                            <a class='btn btn-danger btn-mini' href="{:U('User/user_delld',array('lid'=>$vo1['lid']))}">
+                                                <i class='icon-remove'></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </volist>                                      
+                                </tbody>
+                                </table>
+                            </div>
+                            </div>
+                        </div>
+                      
+                        <div class='modal hide fade' id='selDd' role='dialog' tabindex='-1'>
+                            <div class='modal-header'>
+                                <button class='close' data-dismiss='modal' type='button'>&times;</button>
+                                <h3>选择本学期领导</h3>
+                            </div>    
+							 <form method='post' action="{:U('User/user_selld')}">        
+                            <div class='modal-body'>                                
+                                <table class='table table-hover'>
+                                    <thead>
+	                                    <tr>
+	                                    <td><label class="checkbox"><input type="checkbox" value="-1" id="all_select"><strong>全选 </strong></td>
+	                                    <td><strong>工作证号</strong></td>
+	                                    <td><strong>领导姓名</strong></td>
+	                                    <td><strong>职称</strong></td>
+	                                    <td><strong>所在院系</strong></td>
+	                                    <!--td><strong>身份证号</strong></td>
+	                                    <td><strong>固定电话</strong></td>
+	                                    <td><strong>电子邮件</strong></td-->
+	                                    </tr>
+                                    </thead>
+                                    <tbody>
+	                                    <volist  name="ld" id="vo2">
+	                                    <tr>
+	                                    <td><input type="checkbox" name="uid[]" value="{$vo2.uid}"></td>
+	                                    <td>{$vo2.teaid}</td>
+	                                    <td>{$vo2.name}</td>
+	                                    <td>{$vo2.title}</td>
+	                                    <td>{$vo2.college}</td>
+	                                    <!--td>{$vo2.idcard}</td>
+	                                    <td>{$vo2.phone}</td>
+	                                    <td>{$vo2.email}</td-->
+	                                    </tr>
+	                                    </volist>
+									</tbody>
+								</table>                           
+								</div>
+                            <div class='modal-footer'>
+                                <button class='btn btn-primary' type='submit'>添加</button>
+                                <button class='btn' data-dismiss='modal'>关闭</button>
+                            </div>
+                            </form>
+                        </div> 
+
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        </div>
+    </div>
+</section>
+<!--script type="text/javascript">
+    $(document).ready(function(){
+        $('#selbtn').click(function(){
+            $('#selDd').modal().css({
+                        width: 'auto',
+                        'margin-left': function () {
+                           return -($(this).width() / 2);
+                       }
+                    }); 
+        });
+    });
+</script-->      
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#umanager').nav_slide('umanager','user_dd');
+        var first = true;
+        $('#all_select').click(function(){
+            if(first) {
+                $("input[name='uid[]']").attr("checked",true);
+                first = false;
+            }else {
+                $("input[name='uid[]']").attr("checked",false);
+                first = true;
+            }
+        });
+    });
+</script>  
+<include file="./jwcld/Tpl/footerTemp.html" />

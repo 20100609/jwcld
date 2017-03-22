@@ -1,0 +1,23 @@
+<include file="./jwcld/Tpl/noticeHeader.html" />
+	<div class="container-fluid" style="height: 1300px;"><!--整个内容部分-->
+		<div class="row-fluid">
+			<div class="member" style="width: 1240px; margin: auto; font-size: 16px; line-height: 30px;">
+		        <p style="text-align: center; margin-top: 20px; font-size: 18px;padding-bottom: 30px;"><b>领导成员简介</b></p>
+		        <hr>
+		        <div class="submember" style="padding-left: 60px;">
+					<volist name="data" id="vo">
+						<div class="teacher" style="width: 350px; margin: 5px; padding-left: 5px; float: left; background-color: #F9E9ED;">
+							<a href="{:U('Notice/member_info',array('id'=>$vo['uid']))}" style="text-decoration: none; color: #20649F;">
+								<p>
+									<h5>姓名:&nbsp;{$vo.name}</h5>
+									<spam style="display: block;">院系/单位:&nbsp;{$vo.college}</spam>
+									<spam style="display: block;">职务:&nbsp;{$vo.pos}</spam>
+								</p>
+							</a>
+						</div>
+					</volist>
+				</div>
+		       </div>
+		</div>
+    </div>
+<include file="./jwcld/Tpl/noticeFooter.html" />

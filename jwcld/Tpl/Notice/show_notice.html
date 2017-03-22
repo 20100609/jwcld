@@ -1,0 +1,141 @@
+<include file="./jwcld/Tpl/headerTemp.html" />
+<section id='content'>
+    <div class='container-fluid'>
+        <div class='row-fluid' id='content-wrapper'>
+        <div class='span12'>
+            <div class='row-fluid'>
+                <div class='span6'>
+                    <div class='page-header'>
+                        <h1 class='pull-left'>
+                            <i class='icon-dashboard'></i>
+                            <span>通知管理</span>
+                        </h1>
+                    </div>
+                </div>
+                <div class="span2 pull-right">
+                    <a class='btn btn-success' style='margin-top:30px;' data-toggle='modal' href="#uploadfilenotice">
+                        <i class='icon-plus'>&nbsp;&nbsp;<strong>上传通知</strong></i>
+                    </a>
+                </div>
+                <div class="span2 pull-right">
+                    <a class='btn btn-success' style='margin-top:30px;' data-toggle='modal' href='#uploadfilejb' role='button'>
+                        <i class='icon-share'>&nbsp;&nbsp;<strong>上传简报/专题报告</strong></i>
+                    </a>
+                </div>
+                <div class='row-fluid'>
+                    <div class='span12 box bordered-box orange-border' style='margin-bottom:0;'>
+                        <div class='box-header green-background'>
+                            <div class='text-center'>首页通知信息</div>
+                        </div>
+                    <div class='box-content box-no-padding'>
+                        <div class='responsive-table'>
+                            <div class='scrollable-area'>
+                                <form id="form1" action="{:U('Notice/show_notice')}" method="post" class="form-inline pull-right" style="margin:10px;">
+                                    <input type="text" name="title" class="input-xlarge" placeholder="检索内容">
+                                    <button type="submit" class="btn">检索</button>
+                                </form>
+                                <table class='table table-bordered table-striped' style='margin-bottom:0;'>
+                                <thead>
+                                <tr>
+                                    <td><strong>序号</strong></td>    
+                                    <td><strong>标题</strong></td>
+                                    <td><strong>时间</strong></td>
+                                    <!--td><strong>编辑&nbsp;|&nbsp;删除</strong></td-->
+                                </tr>
+                                </thead>
+                                <tbody>
+								<volist name="noticeList" id="vo" key="i">
+                                <tr>
+                                    <td>{$i}</td>   
+                                    <td>{$vo.ftitle}</td>
+                                    <td>{$vo.uptime}</td>
+                                    <!--td>
+                                        <div class='text-left'>
+                                            <a class='btn btn-success btn-mini' href="{:U('Notice/notice_info',array('id'=>$vo['id']))}" style='margin-right:10px;'>
+                                                <i class='icon-edit'></i>
+                                            </a>
+                                            <button class='btn btn-danger btn-mini' href="{:U('Notice/notice_delete',array('id'=>$vo['id']))}" id="remove">
+                                                <i class='icon-remove'></i>
+                                            </button>
+                                        </div>
+                                    </td-->
+                                </tr>
+								</volist>
+                                </tbody>
+                                </table>
+                                <div class="pagination" style="margin: auto; width: 750px;">{$page}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        </div>
+    </div>
+<div class='modal hide fade' id='uploadfilejb' role='dialog' tabindex='-1'>
+    <div class='modal-header'>
+        <button class='close' data-dismiss='modal' type='button'>&times;</button>
+        <h3>上传简报文件</h3>
+    </div> 
+    <form class='form form-horizontal' style='margin-bottom: 0;' enctype="multipart/form-data" method="post" action="{:U('Notice/uploadFilejb')}">
+        <div class='modal-body'>
+            <div class='control-group'>
+                <label class='control-label'>文件标题</label>
+                <div class='controls'>
+                    <input class='input-large' type='text' name="ftitle" />
+                </div>
+            </div>
+            <div class='control-group'>
+                <label class='control-label'>请选择文件[<span style="color: #ff0000;">pdf格式</span>]</label>
+                <div class='controls'>
+                    <input class='input-large' type='file' name="file1" />
+                </div>
+            </div>
+        </div>
+        <div class='modal-footer'>
+            <button class='btn btn-primary' type="submit">导入</button>
+            <button class='btn' data-dismiss='modal'>关闭</button>
+        </div>
+    </form>
+</div>
+<div class='modal hide fade' id='uploadfilenotice' role='dialog' tabindex='-1'>
+    <div class='modal-header'>
+        <button class='close' data-dismiss='modal' type='button'>&times;</button>
+        <h3>上传通知文件</h3>
+    </div> 
+    <form class='form form-horizontal' style='margin-bottom: 0;' enctype="multipart/form-data" method="post" action="{:U('Notice/uploadFilenotice')}">
+        <div class='modal-body'>
+            <div class='control-group'>
+                <label class='control-label'>文件标题</label>
+                <div class='controls'>
+                    <input class='input-large' type='text' name="ftitle" />
+                </div>
+            </div>
+            <div class='control-group'>
+                <label class='control-label'>请选择文件[<span style="color: #ff0000;">pdf格式</span>]</label>
+                <div class='controls'>
+                    <input class='input-large' type='file' name="file1" />
+                </div>
+            </div>
+        </div>
+        <div class='modal-footer'>
+            <button class='btn btn-primary' type="submit">导入</button>
+            <button class='btn' data-dismiss='modal'>关闭</button>
+        </div>
+    </form>
+</div>
+</section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#unotice').nav_slide('unotice','show_notice');
+        $('#remove').click(function(){
+            var r = confirm("确定删除该通知吗？");
+            if(r == true){
+                location.href = $(this).attr('href');
+            }else{
+                return false;
+            }
+        });
+    });
+</script>
+<include file="./jwcld/Tpl/footerTemp.html" />

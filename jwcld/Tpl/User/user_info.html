@@ -1,0 +1,169 @@
+<include file="./jwcld/Tpl/headerTemp.html" />
+<section id='content'>
+    <div class='container-fluid'>
+        <div class='row-fluid' id='content-wrapper'>
+        <div class='span12'>
+            <div class='row-fluid'>
+                <div class='span6'>
+                    <div class='page-header'>
+                        <h1 class='pull-left'>
+                            <i class='icon-user'></i>
+                            <span>人员管理-编辑用户</span>
+                        </h1>
+                    </div>
+                </div>  
+                <div class='row-fluid'>
+                    <div class='span12 box'>
+                        <div class='box-header green-background'>
+                            <div class='title'>
+                                <div class='icon-edit'></div>
+                                用户信息
+                            </div>
+                        </div>
+                        <div class='box-content'>
+                            <form accept-charset="UTF-8" action="{:U('User/editUser',array('flag'=>$flag))}" class="form form-horizontal" method="post" style="margin-bottom: 0;">
+                            <div class='control-group'>
+                                <label class='control-label' for='inputSelect'>用户角色</label>
+                                <div class='controls'>
+                                    <select id='inputSelect' name='role'>
+                                        <if condition="$euser['role'] eq 1">
+                                            <option value='1' selected="selected">系统管理员</option>
+                                            <else /><option value='1'>系统管理员</option>
+                                        </if>
+                                        <if condition="$euser['role'] eq 2">
+                                            <option value='2' selected="selected">学校领导</option>
+                                            <else /><option value='2'>学校领导</option>
+                                        </if>
+                                        <if condition="$euser['role'] eq 3">
+                                            <option value='3' selected="selected">部门领导</option>
+                                            <else /><option value='3'>部门领导</option>
+                                        </if>
+                                        <if condition="$euser['role'] eq 4">
+                                            <option value='4' selected="selected">学院领导</option>
+                                            <else /><option value='4'>学院领导</option>
+                                        </if>
+                                        <if condition="$euser['role'] eq 5">
+                                            <option value='5' selected="selected">教师</option>
+                                            <else /><option value='5'>教师</option>
+                                        </if>
+                                    </select>                                
+                                </div>
+                            </div>
+                            <div class='control-group'>
+                                <label class='control-label' for='inputNumber'>工作证号</label>
+                                <div class='controls'>
+                                        <input id='inputNumber' type='text' name='teaid' value='{$euser.teaid}' />
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>用户姓名</label>
+                                    <div class='controls'>
+                                        <input id='inputText1' type='text' name='name' value='{$euser.name}' />
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>职称（可选）</label>
+                                    <div class='controls'>
+                                        <input id='inputText1' type='text' name='title' value='{$euser.title}' />
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <label class='control-label' for='tcollege'>院系/机构</label>
+                                    <div class='controls'>
+                                        <select class='select2 input-xlarge' name="college" id="tcollege">
+                                        <volist name="college" id="vo">
+                                            <if condition = "$euser[college] eq $vo[college]">
+                                            <option value="{$vo.college}" selected="selected">{$vo.college}</option>
+                                            <else />
+                                            <option value="{$vo.college}" >{$vo.college}</option>
+                                            </if>
+                                        </volist>
+                                        </select>
+                                        <!--input id='inputText1' type='text' name='college' value='{$euser.college}' /-->
+                                    </div>
+                                </div>
+                                <div class='control-group'>
+                                    <label class='control-label' for='inputText1'>*领导职务</label>
+                                    <div class='controls'>
+                                    <select id="inputText2" name='pos'>
+                                        <if condition="$euser['role'] eq 1">
+                                            <option value="-1" selected="selected">**非领导用户请跳过**</option>
+                                        </if>
+                                        <if condition="$euser['role'] eq 2">
+                                            <volist name="pos1" id="vo">
+                                            <if condition = "$euser[pos] eq $vo[pos1]">
+                                            <option value="{$vo.pos1}" selected="selected">{$vo.pos1}</option>
+                                            <else />
+                                            <option value="{$vo.pos1}" >{$vo.pos1}</option>
+                                            </if>
+                                            </volist>
+                                        </if>
+                                        <if condition="$euser['role'] eq 3">
+                                            <volist name="pos2" id="vo">
+                                            <if condition = "$euser[pos] eq $vo[pos2]">
+                                            <option value="{$vo.pos2}" selected="selected">{$vo.pos2}</option>
+                                            <else />
+                                            <option value="{$vo.pos2}" >{$vo.pos2}</option>
+                                            </if>
+                                            </volist>
+                                        </if>
+                                        <if condition="$euser['role'] eq 4">
+                                            <volist name="pos3" id="vo">
+                                            <if condition = "$euser[pos] eq $vo[pos3]">
+                                            <option value="{$vo.pos3}" selected="selected">{$vo.pos3}</option>
+                                            <else />
+                                            <option value="{$vo.pos3}" >{$vo.pos3}</option>
+                                            </if>
+                                            </volist>
+                                        </if>
+                                        <if condition="$euser['role'] eq 5">
+                                            <option value="-1" selected="selected">**非领导用户请跳过**</option>
+                                        </if>
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class='form-actions'>
+                                    <input type='hidden' name='uid' value='{$euser.uid}'>
+                                    <button class='btn btn-primary' type='submit'><i class='icon-save'></i>&nbsp;保存</button>
+                                    <button class='btn btn-danger' type='reset' style="margin-left: 20px;"><i class='icon-undo'></i>&nbsp;重置</button>
+                                    <if condition="$flag eq 0">
+                                        <a class='btn' style="margin-left: 20px;" href="{:U('User/user')}"><i class='icon-remove'></i>&nbsp;取消</a>
+                                    <else />
+                                        <a class='btn' style="margin-left: 20px;" href="{:U('User/user_ld')}"><i class='icon-remove'></i>&nbsp;取消</a>
+                                    </if>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#umanager').nav_slide('umanager','user_ld');
+        $('#inputSelect').change(function(){
+            var value = $(this).val();
+            if( value == 2 ){
+                $('#inputText2').empty();
+                $('#inputText2').append('<option value="校长" selected="selected">校长</option><option value="副校长">副校长</option><option value="书记">书记</option><option value="副书记">副书记</option><option value="校长助理">校长助理</option><option value="常务副校长">常务副校长</option>');
+            }
+            else if(value == 3){
+                $('#inputText2').empty();
+                $('#inputText2').append('<option value="处长" selected="selected">处长</option><option value="副处长">副处长</option><option value="主任">主任</option><option value="副主任">副主任</option><option value="部长">部长</option><option value="副部长">副部长</option><option value="书记">书记</option><option value="副书记">副书记</option>');
+            }
+            else if(value == 4){
+                $('#inputText2').empty();
+                $('#inputText2').append('<option value="院长" selected="selected">院长</option><option value="副院长">副院长</option><option value="书记">书记</option><option value="副书记">副书记</option><option value="教学副院长">教学副院长</option><option value="系主任">系主任</option><option value="副系主任">副系主任</option><option value="部长（教育学部）">部长（教育学部）</option><option value="副部长（教育学部）">副部长（教育学部）</option>');
+            }
+            else{
+                $('#inputText2').empty();
+                $('#inputText2').append('<option value="-1" selected="selected">**非领导用户请跳过**</option>');
+            }
+        });
+    });
+</script> 
+<include file="./jwcld/Tpl/footerTemp.html" />

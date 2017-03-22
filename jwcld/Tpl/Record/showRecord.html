@@ -1,0 +1,379 @@
+<include file="./jwcld/Tpl/headerTemp.html" />
+<section id='content'>
+    <div class='container-fluid'>
+    <div class='row-fluid' id='content-wrapper'>
+    <div class='span12'>
+    <div class='row-fluid'>
+        <div class='span12'>
+            <div class='page-header'>
+                <h1 class='pull-left'>
+                    <i class='icon-table'></i>
+                    <span>听课记录在线查看</span>
+                </h1>
+            </div>
+        </div>
+<!--课程名称、学生院系、年级、课程类别 -->
+<div id="search">
+<form method="post" action="{:U('Record/showRecord')}">
+<if condition="$Think.session.userRole lt 3">
+<div class='row-fluid'>
+<div class='span3'>
+    <div class='row-fluid'>
+        <strong>学年学期</strong>
+        <select class='select2 input-block-level' name="yt" id="yterm">
+            <option value='-1' selected="selected"/>------请选择------
+        <volist name="yt" id="vo">
+            <option value="{$vo.value}">{$vo.item}</option>
+        </volist>
+        </select>
+    </div>
+</div>
+<div class='span2'>
+    <div class='row-fluid'>
+        <strong>是否审核</strong>
+        <select class='select2 input-block-level' name="pass">
+            <option value='-1' selected="selected"/>------请选择------
+            <option value="0">未审核</option>
+            <option value="1">已审核</option>
+        </select>
+    </div>
+</div>
+<div class='span2'>
+    <div class='row-fluid'>
+        <strong>是否发布</strong>
+        <select class='select2 input-block-level' name="post">
+            <option value='-1' selected="selected"/>------请选择------
+            <option value="0">未发布</option>
+            <option value="1">已发布</option>
+        </select>
+    </div>
+</div>
+</div>
+
+<div class='row-fluid' style="margin-top:10px; margin-bottom:2px;">
+<div class='span2'>
+    <div class='row-fluid'>
+        <strong>教师名称</strong>
+        <select class='select2 input-block-level' name="teacher">
+            <option value='-1' selected="selected"/>------请选择------
+        <volist name="tea" id="vo">
+            <option value="{$vo.teaid}">{$vo.tname}</option>
+        </volist>
+        </select>
+    </div>
+</div>
+<div class='span2'>
+    <div class='row-fluid'>
+        <strong>教师职称</strong>
+        <select class='select2 input-block-level' name="title">
+            <option value='-1' selected="selected"/>------请选择------
+			<volist name="ttitle" id="vo">
+				<option value="{$vo.title}">{$vo.title}</option>
+			</volist>
+        </select>
+    </div>
+</div>
+<div class='span4'>
+    <div class='row-fluid'>
+        <strong>教师单位</strong>
+        <select class='select2 input-block-level' name="tcollege">
+            <option value='-1' selected="selected"/>------请选择------
+        <volist name="tcollege" id="vo">
+            <option value="{$vo.tcollege}">{$vo.tcollege}</option>
+        </volist>
+        </select>
+    </div>
+</div>
+<div class='span2'>
+    <div class='row-fluid'>
+        <strong>上课地点</strong>
+        <select class='select2 input-block-level' name="skplace">
+            <option value='-1' selected="selected"/>------请选择------
+        <volist name="place" id="vo">
+            <option value="{$vo.cplace}">{$vo.cplace}</option>
+        </volist>
+        </select>
+    </div>
+</div>
+</div>
+
+<div class='row-fluid' style="margin-top:10px; margin-bottom:2px;">
+<div class='span2'>
+    <div class='row-fluid'>
+        <strong>课程名称</strong>
+        <select class='select2 input-block-level' name="course">
+            <option value='-1' selected="selected"/>------请选择------
+        <volist name="course" id="vo">
+            <option value="{$vo.cname}">{$vo.cname}</option>
+        </volist>
+        </select>
+    </div>
+</div>
+<div class='span2'>
+    <div class='row-fluid'>
+        <strong>培养层次</strong>
+        <select class='select2 input-block-level' name="pycc">
+            <option value='-1' selected="selected"/>------请选择------
+            <option value="1">本科</option>
+            <option value="2">研究生</option>
+        </select>
+    </div>
+</div>
+<!-- <div class='span4'>
+    <div class='row-fluid'>
+        <strong>学生院系</strong>
+        <select class='select2 input-block-level' name="scollege">
+            <option value='-1' selected="selected"/>------请选择------
+        <volist name="scollege" id="vo">
+            <option value="{$vo.scollege}">{$vo.scollege}</option>
+        </volist>   
+        </select>
+    </div>
+</div> -->
+<div class='span2'>
+    <div class='row-fluid'>
+        <strong>年级</strong>
+        <select class='select2 input-block-level' name="sclass">
+            <option value='-1' selected="selected"/>------请选择------
+        <volist name="sclass" id="vo">
+            <option value="{$vo.sclass}">{$vo.sclass}</option>
+        </volist>    
+        </select>
+    </div>
+</div>
+<div class='span2'>
+    <div class='row-fluid'>
+        <strong>领导姓名</strong>
+        <select class='select2 input-block-level' name="ld">
+            <option value='-1' selected="selected"/>------请选择------
+        <volist name="ld" id="vo">
+            <option value="{$vo.lid}">{$vo.lname}</option>
+        </volist>
+        </select>
+    </div>
+</div>
+
+<button class="btn btn-defalut pull-right" style="margin:17px 0px 0px 0px;" type="submit">检索记录 | Search</button>
+</div>
+</if>
+</form>
+</div>
+        
+
+<div class='row-fluid'>
+	<div class='span12 box bordered-box orange-border' style='margin-bottom:0;'>
+		<div class='box-header green-background'>
+			<div class='text-center'>听课记录检索结果</div>
+            <if condition="$Think.session.userRole eq 1">
+                <button class='btn btn-success btn-large' name='button' style='position:absolute; left:0px;top:2px;' id="allCheck">审核</button>
+            </if>
+            <if condition="$Think.session.userRole eq 1">
+                <a class='btn btn-success btn-large' style='position: absolute;left:80px;top:2px;' href="{:U('Record/setAllPost')}">
+                    发布全部已审核记录
+                </a>
+            </if>
+            <if condition="$Think.session.userRole eq 1">
+                <a class='btn btn-success btn-large' style='position: absolute;right:0px;top:2px;' href="{:U('Record/setAllPostCancel')}">
+                    取消发布所有记录
+                </a>
+            </if>
+		</div>
+	<div class='box-content box-no-padding'>
+		<div class='responsive-table'>
+			<div class='scrollable-area'>
+				<table class='table table-bordered table-hover table-striped' style='margin-bottom:0;'>
+				<thead>
+				<tr>
+                    <if condition="$Think.session.userRole eq 1">
+                        <td>
+                            <label class="checkbox"><input type="checkbox" value="-1" id="all_select"><strong>全选 </strong></label>
+                        </td>
+                    </if>
+					<td><strong>学年学期</strong></td> 
+					<td><strong>课程名称</strong></td>
+					<td><strong>课程类别</strong></td>
+                    <if condition="$Think.session.userRole lt 6">
+					<td><strong>教师姓名</strong></td>
+                    </if>
+					<td><strong>教师单位</strong></td>
+					<td><strong>职称</strong></td>
+                    <td><strong>培养层次</strong></td>
+					<td><strong>上课地点</strong></td>
+					<td><strong>上课时间</strong></td>
+					<!-- <td><strong>学生院系</strong></td> -->
+					<td><strong>授课对象</strong></td>
+					<td><strong>领导姓名</strong></td>
+					<td>
+                        <if condition="$Think.session.userRole eq 1">
+                            <strong>编辑&nbsp;&nbsp;删除</strong>
+                        <else />
+                            <strong>操作</strong>
+                        </if>
+                    </td>
+                    <if condition="$Think.session.userRole eq 1">
+                        <td><strong>审核</strong></td>
+                    </if>
+                    <if condition="$Think.session.userRole eq 1">
+                        <td><strong>发布</strong></td>
+                    </if>
+				</tr>
+				</thead>
+				<tbody>
+				<volist name="data" id="vo1">
+				<tr>
+                    <if condition="$Think.session.userRole eq 1">
+                        <td><input type="checkbox" value="{$vo1.tid}" name='tids[]'></td>
+                    </if>
+					<td>{$vo1["year"]}-{$vo1["year"]+1}{$vo1.term}</td>
+					<td>{$vo1.cname}</td>
+					<td>{$vo1.category1}&nbsp;|&nbsp;{$vo1.category2}</td>
+                    <if condition="$Think.session.userRole lt 6">
+					<td>{$vo1.tname}</td>
+                    </if>
+					<td>{$vo1.tcollege}</td>
+					<td>{$vo1.title}</td>
+                    <td style="text-align:center;">
+                          <if condition="$vo1['pycc'] eq 1">
+                            本科
+                          <else/>研究生
+                        </if>
+                    </td>
+					<td>{$vo1.cplace}</td>
+					<td>{$vo1.ctime}</td>
+					<!-- <td>{$vo1.scollege}</td> -->
+					<td>{$vo1.sclass}</td>
+					<td>{$vo1.lname}</td>
+					<td>
+						<div class='text-left'>
+                            <if condition="$Think.session.userRole eq 1">
+                                <a class='btn btn-success btn-mini' href="{:U('Record/editRecord',array('tid'=>$vo1['tid']))}" style='margin-right:10px;'>
+                                    <i class='icon-edit'></i>
+                                </a>
+                                <a class='btn btn-danger btn-mini' href="javascript:if(confirm('确实要删除吗?'))location='{:U('Record/record_delld',array('tid'=>$vo1['tid']))}'" role="button">
+                                    <i class='icon-remove'></i>
+                                </a>
+                            </if>
+                            <if condition="$Think.session.userRole gt 1">
+                                <a class='btn btn-info btn-mini' href="{:U('Record/viewRecord',array('tid'=>$vo1['tid']))}">
+                                    查看
+                                </a>
+                            </if>
+                        </div>
+					</td>
+                    <if condition="$Think.session.userRole eq 1">
+                        <td>
+                            <if condition="$vo1['pass'] eq '0'">
+                                <button class="btn btn-mini btn_pass" tid="{$vo1['tid']}" pass="1">未审核</button>
+                            <else />
+                                <button class="btn btn-mini btn_pass" tid="{$vo1['tid']}" pass="0">已审核</button>
+                            </if>
+                        </td>
+                    </if>
+                    <if condition="$Think.session.userRole eq 1">
+                        <td>
+                            <if condition="$vo1['post'] eq '0'">
+                                <button class="btn btn-mini btn_post" tid="{$vo1['tid']}" post="1">未发布</button>
+                            <else />
+                                <button class="btn btn-mini btn_post" tid="{$vo1['tid']}" post="0">已发布</button>
+                            </if>
+                        </td>
+                    </if>
+				</tr>
+				</volist>
+				</tbody>
+				</table>
+                <div class="pagination" style="margin: auto; width:725px;">{$page}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".btn_pass").click(function(){
+            var url = "__URL__/setPass";
+            var p = {};
+            var obj = $(this);
+            p.tid = $(this).attr("tid");
+            p.pass = $(this).attr("pass");
+            $.post(url,p,function(e){
+                if(e.code == "1"){
+                    if(p.pass == 1){
+                        obj.html("已审核");
+                        obj.attr("pass", 0);
+                    }else{
+                        obj.html("未审核");
+                        obj.attr("pass", 1);
+                    }
+                }else{
+                    alert(e.message);
+                }
+            });
+        });
+        $(".btn_post").click(function(){
+            var url = "__URL__/setPost";
+            var p = {};
+            var obj = $(this);
+            p.tid = $(this).attr("tid");
+            p.post = $(this).attr("post");
+            $.post(url,p,function(e){
+                if(e.code == "1"){
+                    if(p.post == 1){
+                        obj.html("已发布");
+                        obj.attr("post", 0);
+                    }else{
+                        obj.html("未发布");
+                        obj.attr("post", 1);
+                    }
+                }else{
+                    alert(e.message);
+                }
+            });
+        });
+    });
+</script>
+</section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var first = true;
+        $('#all_select').click(function(){
+            if(first) {
+                $("input[name='tids[]']").attr("checked",true);
+                first = false;
+            }else {
+                $("input[name='tids[]']").attr("checked",false);
+                first = true;
+            }
+        });
+        $('#allCheck').click(function(){
+            var f = true;
+            var tids = "";
+            $("input[name='tids[]']").each(function(){
+                var exp = $(this).attr("checked");
+                if(typeof(exp) != "undefined"){
+                    if(f){
+                        tids = $(this).val();
+                        f = false;
+                    }else{
+                        tids += ","+$(this).val();
+                    }
+                }
+            });
+            if(tids != ""){
+                var url = "__URL__/setAllPass";
+                var p = {};
+                p.tids = tids;
+                $.post(url,p,function(e){
+                    if(e.code == "1"){
+                        alert(e.message);
+                        window.location.reload();
+                    }else{
+                        alert(e.message);
+                    }
+                });
+            }
+            
+            return false;
+        });
+    });
+</script>  
+<include file="./jwcld/Tpl/footerTemp.html" />

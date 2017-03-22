@@ -1,0 +1,18 @@
+<include file="./jwcld/Tpl/noticeHeader.html" />
+<head>
+    <link href='/jwcld/Public/assets/stylesheets/bootstrap/bootstrap.css' media='all' rel='stylesheet' type='text/css' />
+    <link href='/jwcld/Public/assets/stylesheets/bootstrap/bootstrap-responsive.css' media='all' rel='stylesheet' type='text/css' />
+</head>
+	<div class="context-warrp"><!--整个内容部分-->
+        <div class="column-rows" style="width: 1000px;margin-left: auto;margin-right: auto;"><!--第一行内容-->
+        	<div align="center" class="intro_title">
+        		<h4><b>{$notice_data['title']}</b></h4>
+        		<h5>{$notice_data['seq']}</h5>
+        	</div>
+            <br>
+        	<div class="content" style="font-size: 14px;" >
+        		{$notice_data['content']}
+        	</div>
+        </div>
+    </div>
+<include file="./jwcld/Tpl/noticeFooter.html" />

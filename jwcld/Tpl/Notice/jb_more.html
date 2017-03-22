@@ -1,0 +1,24 @@
+<include file="./jwcld/Tpl/noticeHeader.html" />
+	<div class="context-warrp"><!--整个内容部分-->
+        <div class="column-rows" style="width: 1000px;margin-left: auto;margin-right: auto;"><!--第一行内容-->
+        	<div class="column-item item-all" style="min-height:50px;"><!--第一行第一列内容-->
+        			<div class="column-title"><!--title-->
+           				<b class="title-icon icon-arrow"></b>
+            			<span class="title-text">领导简报</span>
+        			</div>
+                    <div class="column-list">
+                    <ul>
+                        <volist name="list" id="vo">
+                            <li>
+                                <span class="time">{$vo.uptime}</span> 
+                                <b class="icon-triangle"></b>
+                                <a href="{:U('Notice/download_file',array('fid'=>$vo['fid']))}" target="_blank" style="width: 700px;">{$vo.ftitle}</a>
+                            </li> 
+                        </volist>
+                    </ul>
+                	</div>
+                	<div style="margin-left: auto;margin-right: auto;">{$page}</div>
+    			</div>
+        </div>
+    </div>
+<include file="./jwcld/Tpl/noticeFooter.html" />

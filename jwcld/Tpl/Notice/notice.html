@@ -1,0 +1,230 @@
+﻿<include file="./jwcld/Tpl/noticeHeader.html" />
+    <!-- Banner Start -->
+    <div id="banner" style="width: 1444px;margin-left: auto;margin-right: auto;">
+        <div class="slider-wrapper theme-default">
+            <div id="slider" class="nivoSlider">
+                <a href="#"><img src="/jwcld/Public/images/banner1.jpg" title="#banner1" alt="" /></a>
+                <a href="#"><img src="/jwcld/Public/images/banner2.jpg" title="#banner2" alt="" /></a>
+                <a href="#"><img src="/jwcld/Public/images/banner3.jpg" title="#banner3" alt="" /></a>
+            </div>
+            <!-- Banner Caption Start -->
+            <div id="banner1" class="nivo-html-caption">
+                <div class="carousel-caption" style="padding: 10px;font-size: 15px;width:1444px;margin:auto">
+                            <p style="width: 450px;float:right">考场井然有序</p><p style="width: 722px;float:right">董校长巡视考试工作</p>
+                </div>
+            </div>
+            <!-- Banner Caption End -->
+            <!-- Banner Caption Start -->
+            <div id="banner2" class="nivo-html-caption">
+                <div class="carousel-caption" style="padding: 10px;font-size: 15px;width:1444px;margin:auto">
+                            <p style="width: 400px;float:right">健美课堂</p><p style="width: 722px;float:right">教学观摩课</p>
+                </div>
+            </div>
+            <!-- Banner Caption End -->
+            <!-- Banner Caption Start -->
+            <div id="banner3" class="nivo-html-caption">
+                <div class="carousel-caption" style="padding: 10px;font-size: 15px;width:1444px;margin:auto">
+                            <p style="width: 450px;float:right">教学巡视工作讨论</p><p style="width: 722px;float:right">刘川生书记听课</p>
+                </div>
+            </div>
+            <!-- Banner Caption End -->
+        </div>
+    </div>
+    <!-- Banner End -->
+    <!-- Content Section Start -->
+    <div id="contentsec" style="padding: 0px; margin-top: -15px;">
+        <div class="inner" style="width: 1444px;margin-left: auto;margin-right: auto;">
+            <div class="widget-placeholder">
+                <div class="widget donation" style="margin-bottom: -20px;">
+                    <div class="donation-area" style="height: 100px;">
+                        <div class="donation-detail" style="width:1360px; margin-left: 44px;">
+                            <div class="raised" style="height: 100px;">
+                                <a href="{:U('Record/record')}">
+                                    <h1 class="colr">填写听课记录</h1>
+                                    <h2>听课记录相关信息填写</h2>
+                                </a>
+                            </div>
+                            <div class="raised" style="height: 100px;">
+                                <a href="{:U('Record/showRecord')}">
+                                    <h1 class="colr">查看听课记录</h1>
+                                    <h2>查看已经填写的听课信息</h2>
+                                </a>
+                            </div>
+                            <div class="raised" style="height: 100px;">
+                                <a href="{:U('Analysis/analysis')}">
+                                    <h1 class="colr">查看评价统计</h1>
+                                    <h2>查看相关数据的统计分析结果</h2>
+                                </a>
+                            </div>
+                            <div class="raised" style="height: 100px;">
+                                <a href="#" data-toggle='modal' data-target="#course_link">
+                                    <h1 class="colr">课程查询</h1>
+                                    <h2>可按照条件查询课程</h2>
+                                </a>
+                            </div>
+                            <div class="raised" style="height: 100px;">
+                                <a href="http://kczx.bnu.edu.cn">
+                                    <h1 class="colr">课程大纲介绍</h1>
+                                    <h2>课程大纲查询及查看</h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fullwidth Box Start -->
+            <div class="fullwidth box left" >
+                <div class="widgets-area-conts" >
+                    <!-- Widget PlaceHolder Start -->
+                    <div class="widget-placeholder" style="height: 330px;width:500px">
+                        <!-- Text Widget Start -->
+                        <div class="widget textwidget">
+                            <div class="column-title"><!--title-->
+                                <h3 class="widget-head" style="width: 200px;">通知公告</h3>
+                                <a class="title-more" href="{:U('Notice/notice_more')}" target="_blank"></a>
+                            </div>
+                        </div>
+                        <div class="column-list">
+                        <ul>
+                            <volist name="noticeList" id="vo1">
+                                <li>
+                                    <span class="time">{$vo1.uptime}</span> 
+                                    <b class="icon-triangle"></b>
+                                    <a href="{:U('Notice/download_file',array('fid'=>$vo1['fid']))}" target="_blank">{$vo1.ftitle}</a>
+                                </li> 
+                            </volist> 
+                        </ul>
+                        </div>
+                        <!-- Text Widget End -->
+                    </div>
+                    <!-- Widget PlaceHolder End -->
+                    <!-- Widget PlaceHolder Start -->
+                    <div class="widget-placeholder" >
+                        <!-- Calendar Widget Start -->
+                        <div class="widget wp-calendar">
+                        <h3 class="widget-head">日历</h3>
+                        <div id="calendar" style="padding-bottom: 0px;padding-top: 0px;">
+                        </div>
+                        </div>
+                        <!-- Calendar Widget End -->
+                    </div>
+                    <!-- Widget PlaceHolder End -->
+                    <!-- Widget PlaceHolder Start -->
+                    <div class="widget-placeholder" style="height: 150px;width:500px">
+                        <!-- Donation Widget Start -->
+                        <div class="widget donation">
+                            <h3 class="widget-head" style="width: 200px;">常用文件</h3>
+                            <a class="title-more" href="{:U('Notice/jb_more')}" target="_blank"></a>
+                        </div>
+                        <div class="column-list">
+                        <ul>
+                            <volist name="jbList" id="vo">
+                                <li>
+                                    <span class="time">{$vo.uptime}</span> 
+                                    <b class="icon-triangle"></b>
+                                    <a href="{:U('Notice/download_file',array('fid'=>$vo['fid']))}" target="_blank">{$vo.ftitle}</a>
+                                </li> 
+                            </volist>
+                        </ul>
+                        </div>
+                        <!-- Calendar Widget End -->
+                    </div>
+                    <!-- Widget PlaceHolder End -->
+                    <div class="widget-placeholder" style="height: 150px;width:500px;float:right;padding-right: 52px;padding-top: 0px;padding-left: 20px;">
+                        <!-- Donation Widget Start -->
+                        <div class="widget donation">
+                        <h3 class="widget-head" style="width: 200px;">常用链接</h3>
+                        </div>
+                        <!-- Calendar Widget End -->
+                        <div class="column-list">
+                        <ul>
+                                <li>
+                                    <span class="time">(2016-06-16)</span> 
+                                    <b class="icon-triangle"></b>
+                                    <a href="http://www.bnu.edu.cn/" target="_blank">北京师范大学首页</a>
+                                </li> 
+                                <li>
+                                    <span class="time">(2016-06-16)</span> 
+                                    <b class="icon-triangle"></b>
+                                    <a href="http://jwc.bnu.edu.cn" target="_blank">北京师范大学教务处</a>
+                                </li> 
+                                <li>
+                                    <span class="time">(2016-06-16)</span> 
+                                    <b class="icon-triangle"></b>
+                                    <a href="http://graduate.bnu.edu.cn/" target="_blank">北京师范大学研究生院</a>
+                                </li> 
+                                <li>
+                                    <span class="time">(2016-06-16)</span> 
+                                    <b class="icon-triangle"></b>
+                                    <a href="http://prsc.bnu.edu.cn/" target="_blank">北京师范大学公共资源服务中心</a>
+                                </li> 
+                        </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Fullwidth Box End -->
+        </div>
+    </div>
+    <!-- Content Section End -->
+</div>
+<!-- Wrapper End -->
+<div class='modal hide fade' id='course_link' role='dialog' tabindex='-1' style="width:780px; height: 320px; margin-left: -380px;">
+    <div class='modal-header'>
+        <button class='close' data-dismiss='modal' type='button'>&times;</button>
+        <h3>课程查询</h3>
+    </div> 
+    <form class='form form-horizontal' style='margin-bottom: 0;' enctype="multipart/form-data" method="post" action="{:U('Notice/uploadFile')}">
+        <div class='modal-body' style="height: 200px;">
+            <div class="column-item item-block">
+                <div class="column-item item-img">
+                    <a href="http://zyfw.prsc.bnu.edu.cn/public/dykb.kckb.html">
+                        <img src="/jwcld/Public/images/kckb.png" width="226" height="87">
+                    </a>
+                </div>
+                <div class="column-item item-img">
+                    <a href="http://zyfw.prsc.bnu.edu.cn/public/dykb.jskb.html">
+                        <img src="/jwcld/Public/images/jskb.png" width="226" height="87">
+                    </a>
+                </div>
+            </div>
+            <div class="column-item item-block">
+                <div class="column-item item-img">
+                    <a href="http://zyfw.prsc.bnu.edu.cn/public/dykb.zykb.html">
+                        <img src="/jwcld/Public/images/zykb.png" width="226" height="87">
+                    </a>
+                </div>
+                <div class="column-item item-img">
+                    <a href="http://zyfw.prsc.bnu.edu.cn/public/dykb.jsikb.html">
+                        <img src="/jwcld/Public/images/jshkb.png" width="226" height="87">
+                    </a>
+                </div>
+            </div>
+            <div class="column-item item-block">
+                <div class="column-item item-img">
+                    <a href="http://zyfw.prsc.bnu.edu.cn/public/dykb.zrjckb.html">
+                        <img src="/jwcld/Public/images/jckb.png" width="226" height="87">
+                    </a>
+                </div>
+                <div class="column-item item-img">
+                    <a href="http://zyfw.prsc.bnu.edu.cn/public/dykb.zkb.html">
+                        <img src="/jwcld/Public/images/qxkb.png" width="226" height="87">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class='modal-footer'>
+            <button class='btn' data-dismiss='modal'>关闭</button>
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#calendar').glDatePicker({
+            showAlways:true
+        });
+    });
+</script>
+<include file="./jwcld/Tpl/noticeFooter.html" />

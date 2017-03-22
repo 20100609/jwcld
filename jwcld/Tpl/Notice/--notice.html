@@ -1,0 +1,227 @@
+﻿<include file="./jwcld/Tpl/noticeHeader.html" />
+    <!-- Banner Start -->
+    <div id="banner" style="width: 1444px;margin-left: auto;margin-right: auto;">
+        <div class="slider-wrapper theme-default">
+            <div id="slider" class="nivoSlider">
+                <a href="#"><img src="/jwcld/Public/images/banner1.jpg" title="#banner1" alt="" /></a>
+                <a href="#"><img src="/jwcld/Public/images/banner2.jpg" title="#banner2" alt="" /></a>
+                <a href="#"><img src="/jwcld/Public/images/banner3.jpg" title="#banner3" alt="" /></a>
+            </div>
+            <!-- Banner Caption Start -->
+            <div id="banner1" class="nivo-html-caption">
+                <div class="ban-capt-desc">
+                    <div class="ban-capt-mid">
+                        <div class="ban-capt-in">
+                            <h1 class="white">"领导听课任务责任重大，如何抓好领导听课的项目是工作的重中之重。"</h1>
+                            <p>
+                                校领导出席本研教学督导工作会议
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Banner Caption End -->
+            <!-- Banner Caption Start -->
+            <div id="banner2" class="nivo-html-caption">
+                <div class="ban-capt-desc">
+                    <div class="ban-capt-mid">
+                        <div class="ban-capt-in">
+                            <h1 class="white">"教务处领导陪同董奇校长巡视考场"</h1>
+                            <p>
+                                董奇校长巡视考场
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Banner Caption End -->
+            <!-- Banner Caption Start -->
+            <div id="banner3" class="nivo-html-caption">
+                <div class="ban-capt-desc">
+                    <div class="ban-capt-mid">
+                        <div class="ban-capt-in">
+                            <h1 class="white">"教务处领导陪同刘川生书记巡视考场"</h1>
+                            <p>
+                                刘川生书记巡视考场
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Banner Caption End -->
+        </div>
+    </div>
+    <!-- Banner End -->
+    <!-- Content Section Start -->
+    <div id="contentsec" style="padding: 0px; margin-top: -15px;">
+        <div class="inner" style="width: 1444px;margin-left: auto;margin-right: auto;">
+            <div class="widget-placeholder">
+                <div class="widget donation" style="margin-bottom: -20px;">
+                    <div class="donation-area">
+                        <div class="donation-detail" style="width:1360px; margin-left: 44px;">
+                            <div class="raised">
+                                <a href="{:U('Record/record')}">
+                                    <h2 class="colr">填写听课记录</h2>
+                                    <p>听课记录相关信息填写</p>
+                                </a>
+                            </div>
+                            <div class="raised">
+                                <a href="{:U('Record/showRecord')}">
+                                    <h2 class="colr">查看听课记录</h2>
+                                    <p>查看已经填写的听课信息</p>
+                                </a>
+                            </div>
+                            <div class="raised">
+                                <a href="{:U('Analysis/analysis')}">
+                                    <h2 class="colr">查看评价统计</h2>
+                                    <p>查看相关数据的统计分析结果</p>
+                                </a>
+                            </div>
+                            <div class="raised">
+                                <a href="http://kczx.bnu.edu.cn">
+                                    <h2 class="colr">课程大纲介绍</h2>
+                                    <p>课程大纲查询及查看</p>
+                                </a>
+                            </div>
+                            <div class="raised">
+                                <a href="#" data-toggle='modal' data-target="#course_link">
+                                    <h2 class="colr">课程查询</h2>
+                                    <p>可按照条件查询课程</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fullwidth Box Start -->
+            <div class="fullwidth box left" >
+                <div class="widgets-area-conts" >
+                    <!-- Widget PlaceHolder Start -->
+                    <div class="widget-placeholder" style="height: 330px;width:500px">
+                        <!-- Text Widget Start -->
+                        <div class="widget textwidget">
+                            <div class="column-title"><!--title-->
+                                <h3 class="widget-head" style="width: 200px;">通知公告</h3>
+                                <a class="title-more" href="{:U('Notice/notice_more')}" target="_blank"></a>
+                            </div>
+                        </div>
+                        <div class="column-list">
+                        <ul>
+                            <volist name="list" id="vo">
+                            <li>
+                                <span class="time">{$vo.date}</span> 
+                                <b class="icon-triangle"></b>
+                                <a href="{:U('Notice/view',array('id'=>$vo['id']))}" target="_blank">{$vo.title}</a>
+                            </li>
+                            </volist> 
+                        </ul>
+                        </div>
+                        <!-- Text Widget End -->
+                    </div>
+                    <!-- Widget PlaceHolder End -->
+                    <!-- Widget PlaceHolder Start -->
+                    <div class="widget-placeholder" >
+                        <!-- Calendar Widget Start -->
+                        <div class="widget wp-calendar">
+                        <h3 class="widget-head">日历</h3>
+                        <div id="calendar" style="padding-bottom: 0px;padding-top: 0px;">
+                        </div>
+                        </div>
+                        <!-- Calendar Widget End -->
+                    </div>
+                    <!-- Widget PlaceHolder End -->
+                    <!-- Widget PlaceHolder Start -->
+                    <div class="widget-placeholder" style="height: 330px;width:500px">
+                        <!-- Donation Widget Start -->
+                        <div class="widget donation">
+                            <h3 class="widget-head" style="width: 200px;">领导简报/专题报告</h3>
+                            <a class="title-more" href="{:U('Notice/jb_more')}" target="_blank"></a>
+                        </div>
+                        <div class="column-list">
+                        <ul>
+                            <volist name="jbList" id="vo">
+                                <li>
+                                    <span class="time">{$vo.uptime}</span> 
+                                    <b class="icon-triangle"></b>
+                                    <a href="{:U('Notice/download_file',array('fid'=>$vo['fid']))}" target="_blank">{$vo.ftitle}</a>
+                                </li> 
+                            </volist>
+                        </ul>
+                        </div>
+                        <!-- Calendar Widget End -->
+                    </div>
+                    <!-- Widget PlaceHolder End -->
+                    <div class="widget-placeholder">
+                        <!-- Donation Widget Start -->
+                        <div class="widget donation">
+            
+                        </div>
+                        <!-- Calendar Widget End -->
+                    </div>
+
+                </div>
+            </div>
+            <!-- Fullwidth Box End -->
+        </div>
+    </div>
+    <!-- Content Section End -->
+</div>
+<!-- Wrapper End -->
+<div class='modal hide fade' id='course_link' role='dialog' tabindex='-1' style="width:780px; height: 320px; margin-left: -380px;">
+    <div class='modal-header'>
+        <button class='close' data-dismiss='modal' type='button'>&times;</button>
+        <h3>课程查询</h3>
+    </div> 
+    <form class='form form-horizontal' style='margin-bottom: 0;' enctype="multipart/form-data" method="post" action="{:U('Notice/uploadFile')}">
+        <div class='modal-body' style="height: 200px;">
+            <div class="column-item item-block">
+                <div class="column-item item-img">
+                    <a href="http://zyfw.prsc.bnu.edu.cn/public/dykb.kckb.html">
+                        <img src="/jwcld/Public/images/kckb.png" width="226" height="87">
+                    </a>
+                </div>
+                <div class="column-item item-img">
+                    <a href="http://zyfw.prsc.bnu.edu.cn/public/dykb.jskb.html">
+                        <img src="/jwcld/Public/images/jskb.png" width="226" height="87">
+                    </a>
+                </div>
+            </div>
+            <div class="column-item item-block">
+                <div class="column-item item-img">
+                    <a href="http://zyfw.prsc.bnu.edu.cn/public/dykb.zykb.html">
+                        <img src="/jwcld/Public/images/zykb.png" width="226" height="87">
+                    </a>
+                </div>
+                <div class="column-item item-img">
+                    <a href="http://zyfw.prsc.bnu.edu.cn/public/dykb.jsikb.html">
+                        <img src="/jwcld/Public/images/jshkb.png" width="226" height="87">
+                    </a>
+                </div>
+            </div>
+            <div class="column-item item-block">
+                <div class="column-item item-img">
+                    <a href="http://zyfw.prsc.bnu.edu.cn/public/dykb.zrjckb.html">
+                        <img src="/jwcld/Public/images/jckb.png" width="226" height="87">
+                    </a>
+                </div>
+                <div class="column-item item-img">
+                    <a href="http://zyfw.prsc.bnu.edu.cn/public/dykb.zkb.html">
+                        <img src="/jwcld/Public/images/qxkb.png" width="226" height="87">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class='modal-footer'>
+            <button class='btn' data-dismiss='modal'>关闭</button>
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#calendar').glDatePicker({
+            showAlways:true
+        });
+    });
+</script>
+<include file="./jwcld/Tpl/noticeFooter.html" />
