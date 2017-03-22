@@ -5,4 +5,4 @@ Thinkphp framework website
 
 1. 访问路径：http://localhost:端口号/jwcld/index.php/Index/index
 2. 删除 \jwcld\jwcld\Runtime 下除default.html文件以外的所有文件【缓存文档，会影响修改后页面效果】
-3. 数据库文件jwcdd_db.sql导入mysql数据库
+3. 数据库文件jwcld_db.sql导入mysql数据库
