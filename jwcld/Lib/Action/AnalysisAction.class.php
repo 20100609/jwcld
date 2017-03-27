@@ -140,7 +140,32 @@ class AnalysisAction extends Action {
         $date = date("y-m-d");
 
         switch ($tid) {
-            case 1: /*if ($userRole == 2) {
+            //1领导听课汇总表
+            case 1: $namearray = array(
+                    0=>array($year."-".($year+1).$term."学期"."领导听课汇总表"),
+                    1=>array(
+                        "序号",
+                        "听课人单位",
+                        "听课领导",
+                        "课程名称",
+                        "主讲教师姓名",
+                        "主讲教师所在单位",
+                        "主讲教师职称",
+                        "授课对象",
+                        "选课人数",
+                        "实到人数",
+                        "听课日期",
+                        "听课节次",
+                        "听课节数",
+                        "听课地点",
+                        "课程教学章节及主要内容",
+                        "对课程教学的评价与建议",
+                        "对学生学习情况的评价与建议",
+                        "对本次课程教学的总体评价",
+                        "师生反映的情况",
+                        "培养层次"
+                        ));   
+                    /*if ($userRole == 2) {
                         $con0 = array();
                         $con0['year'] = $year;
                         $con0['term'] = $term;
@@ -202,31 +227,7 @@ class AnalysisAction extends Action {
                     "xsjy",
                     "ztpj",
                     "ssqk",
-                    "pycc");
-                    $namearray = array(
-                    0=>array($year."-".($year+1).$term."学期"."领导听课汇总表"),
-                    1=>array(
-                        "序号",
-                        "听课人单位",
-                        "听课领导",
-                        "课程名称",
-                        "主讲教师姓名",
-                        "主讲教师所在单位",
-                        "主讲教师职称",
-                        "授课对象",
-                        "选课人数",
-                        "实到人数",
-                        "听课日期",
-                        "听课节次",
-                        "听课节数",
-                        "听课地点",
-                        "课程教学章节及主要内容",
-                        "对课程教学的评价与建议",
-                        "对学生学习情况的评价与建议",
-                        "对本次课程教学的总体评价",
-                        "师生反映的情况",
-                        "培养层次"
-                        ));
+                    "pycc");                    
                     $title = $year."-".($year+1).$term."学期"."领导听课汇总表";
                     $filename = $year."-".($year+1).$term."学期"."领导听课汇总表".$date.".xls";
                     $type=0;
@@ -401,7 +402,7 @@ class AnalysisAction extends Action {
                     $filename = $year."-".($year+1).$term."学期"."各级领导听课次数统计表".$date.".xls";
                     $type = 1;
                     break;
-        //各级领导评价结果统计
+        //5各级领导评价结果统计
         case 5:     $namearray=array(
                     0=>array($year."-".($year+1).$term."学期"."领导听课统计总表（按各级领导评价统计）总表"),
                     1=>array("本研听课情况（门次）",
@@ -488,8 +489,50 @@ class AnalysisAction extends Action {
                     $filename = $year."-".($year+1).$term."学期"."领导听课统计总表（按各级领导评价统计）总表".$date.".xls";
                     $type=2;
                     break;
+        //20170327 添加导出领导用户信息 begin
+        //6导出领导用户信息
+        case 6:     $namearray = array(
+                    0=>array($year."-".($year+1).$term."学期"."听课领导用户信息"),
+                    1=>array("序号",
+                        "工作证号",
+                        "领导姓名",
+                        "职称",
+                        "单位",
+                        "职务",
+                        "组别"));
 
-        }
+                    $ld = M('ld');
+                    $con0 = array();
+                    $con0['year'] = $year;
+                    $con0['term'] = $term;
+                    $lduids=$ld->where($con0)->field('uid')->select();
+                    $lduids = i_array_column($lduids,'uid');
+                    $con['uid'] = array('in',$lduids);                                                                                           
+                    $data = $user->where($con)->select();
+                    for($i=0; $i<count($data,0); $i++){
+                            $data[$i]["teaid"]="'".$data[$i]["teaid"];
+                            if($data[$i]["role"]==2)
+                                $data[$i]["group"]="学校领导";
+                            else if($data[$i]["role"]==3)
+                                $data[$i]["group"]="部门领导";
+                            else
+                                $data[$i]["group"]="院系领导";                                            
+                        }
+
+                    $attrArray = array('',
+                        "teaid",
+                        "name",
+                        "title",
+                        "college",
+                        "pos",
+                        "group");                   
+                    
+                    $title = $year."-".($year+1).$term."学期"."听课领导用户信息";
+                    $filename = $year."-".($year+1).$term."学期"."听课领导用户信息".$date.".xls";
+                    $type=3;
+                    break;
+            //20170327添加导出领导用户信息 end 
+        }        
        //dump($data);
        //return
        // 测试导出用

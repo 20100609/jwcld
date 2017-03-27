@@ -21,6 +21,12 @@
                     <div class='span12 box bordered-box orange-border' style='margin-bottom:0;'>
                         <div class='box-header green-background'>
                             <div class='text-center'>本学期听课领导用户信息</div>
+
+                            <!--20170327添加导出 begin-->
+                            <a class='btn btn-success btn-large' style='position: absolute;left:0px;top:2px;' href="{:U('Analysis/outportLd',array('tid'=>6))}">
+                            <i class='icon-share'>&nbsp;&nbsp;<strong>导出</strong></i>
+                            </a>                            
+                            <!--20170327添加导出 end-->
                         </div>
                         <div class='box-content box-no-padding'>
                             <div class='responsive-table'>
@@ -37,7 +43,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-								<volist name="ldinfo" id="vo1">
+                                <volist name="ldinfo" id="vo1">
                                 <tr>
                                     <td>{$vo1.teaid}</td>
                                     <td>{$vo1.name}</td>
@@ -76,37 +82,37 @@
                                 <button class='close' data-dismiss='modal' type='button'>&times;</button>
                                 <h3>选择本学期领导</h3>
                             </div>    
-							 <form method='post' action="{:U('User/user_selld')}">        
+                             <form method='post' action="{:U('User/user_selld')}">        
                             <div class='modal-body'>                                
                                 <table class='table table-hover'>
                                     <thead>
-	                                    <tr>
-	                                    <td><label class="checkbox"><input type="checkbox" value="-1" id="all_select"><strong>全选 </strong></td>
-	                                    <td><strong>工作证号</strong></td>
-	                                    <td><strong>领导姓名</strong></td>
-	                                    <td><strong>职称</strong></td>
-	                                    <td><strong>所在院系</strong></td>
-	                                    <!--td><strong>身份证号</strong></td>
-	                                    <td><strong>固定电话</strong></td>
-	                                    <td><strong>电子邮件</strong></td-->
-	                                    </tr>
+                                        <tr>
+                                        <td><label class="checkbox"><input type="checkbox" value="-1" id="all_select"><strong>全选 </strong></td>
+                                        <td><strong>工作证号</strong></td>
+                                        <td><strong>领导姓名</strong></td>
+                                        <td><strong>职称</strong></td>
+                                        <td><strong>所在院系</strong></td>
+                                        <!--td><strong>身份证号</strong></td>
+                                        <td><strong>固定电话</strong></td>
+                                        <td><strong>电子邮件</strong></td-->
+                                        </tr>
                                     </thead>
                                     <tbody>
-	                                    <volist  name="ld" id="vo2">
-	                                    <tr>
-	                                    <td><input type="checkbox" name="uid[]" value="{$vo2.uid}"></td>
-	                                    <td>{$vo2.teaid}</td>
-	                                    <td>{$vo2.name}</td>
-	                                    <td>{$vo2.title}</td>
-	                                    <td>{$vo2.college}</td>
-	                                    <!--td>{$vo2.idcard}</td>
-	                                    <td>{$vo2.phone}</td>
-	                                    <td>{$vo2.email}</td-->
-	                                    </tr>
-	                                    </volist>
-									</tbody>
-								</table>                           
-								</div>
+                                        <volist  name="ld" id="vo2">
+                                        <tr>
+                                        <td><input type="checkbox" name="uid[]" value="{$vo2.uid}"></td>
+                                        <td>{$vo2.teaid}</td>
+                                        <td>{$vo2.name}</td>
+                                        <td>{$vo2.title}</td>
+                                        <td>{$vo2.college}</td>
+                                        <!--td>{$vo2.idcard}</td>
+                                        <td>{$vo2.phone}</td>
+                                        <td>{$vo2.email}</td-->
+                                        </tr>
+                                        </volist>
+                                    </tbody>
+                                </table>                           
+                                </div>
                             <div class='modal-footer'>
                                 <button class='btn btn-primary' type='submit'>添加</button>
                                 <button class='btn' data-dismiss='modal'>关闭</button>
