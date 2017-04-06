@@ -102,6 +102,7 @@ class AnalysisAction extends Action {
         $this->topic = $this->getTopic($year,$term,'hz_tkrecord');
         $this->sclass = $this->getSclass($year,$term,'hz_tkrecord');
         $this->title = $this->getTitle($year,$term,'hz_tkrecord');
+        $this->pagecount = $Page->firstRow;
         $this->data = $data;
         $this->year = $year;
         $this->term = $term;
@@ -767,7 +768,7 @@ class AnalysisAction extends Action {
         }
         
     }
-
+    //各级领导评价结果统计
     public function leadervalue(){
         checkLogin();
         $userRole = session('userRole');    //获取用户权限
@@ -789,6 +790,43 @@ class AnalysisAction extends Action {
             $hz_leadervalue = M('hz_leadervalue');
             $data = $hz_leadervalue->where($con)->select();
             $this->yt = get_year_term();
+            $this->term = $term;
+            $this->year = $year;
+            $this->data = $data;
+            $this->display();
+        }else{
+            $this->error("亲~您不具备权限哈~");
+        }
+        
+    }
+    //各单位领导听课评价结果统计
+    public function leaderdetailcount(){
+        checkLogin();
+        import('ORG.Util.Page');
+        $userRole = session('userRole');    //获取用户权限
+        $year = session('year');
+        $term = session('term');
+        if ($userRole == 1 || $userRole == 2 || $userRole == 3) {
+            if(!empty($_POST) && $this->isPost()){
+                if ($this->_post('yt') != -1) {
+                    $yt = $this->_post('yt');
+                    $arr = explode(",", $yt);
+                    $year = $arr[0];
+                    $term = $arr[1];
+                    session('year',$year);
+                    session('term',$term);
+                }
+            }
+            $con['year'] = $year;
+            $con['term'] = $term;
+            $hz_leaderdetailcount = M('hz_leaderdetailcount');
+            $count = $hz_leaderdetailcount->where($con)->count();
+            $Page = new Page($count,10);
+            $Page->setConfig("theme","<ul class='pagination'><li><span>%nowPage%/%totalPage% 页</span></li> %first% %prePage% %linkPage% %nextPage% %end%</ul>");
+            $data = $hz_leaderdetailcount->where($con)->order('lduid asc')->limit($Page->firstRow.','.$Page->listRows)->select();
+            $this->yt = get_year_term();
+            $this->pagecount = $Page->firstRow;
+            $this->page = $Page->show();
             $this->term = $term;
             $this->year = $year;
             $this->data = $data;

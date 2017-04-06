@@ -19,7 +19,7 @@
                     <li class='separator'>
                         <i class='icon-angle-right'></i>
                     </li>
-                    <li class='active'>按院系月份统计</li>
+                    <li class='active'>各单位领导听课评价结果统计</li>
                 </ul>
             </div>
         </div>
@@ -29,7 +29,7 @@
 <div class='span4 pull-right'>
     <div class='row-fluid'>
         <strong>学年学期</strong>
-        <form id="form1" method="post" action="{:U('Analysis/collegevalue')}">
+        <form id="form1" method="post" action="{:U('Analysis/leadervalue')}">
             <select class='select2 input-block-level' name="yt" id="selYt">
                 <option value='-1' selected="selected"/>------请选择------
                 <volist name="yt" id="vo">
@@ -43,44 +43,48 @@
 <div class='row-fluid'>
     <div class='span12 box bordered-box green-border' style='margin-bottom:0;'>
         <div class='box-header green-background'>
-            <div class='text-center'>{$year}-{$year+1}学年&nbsp;&nbsp;{$term}学期领导听课统计总表（按院系、评价统计）</div>
-        <if condition="$Think.session.userRole lt 5">
-                <a class='btn btn-success btn-large' style='position: absolute;left:100px;top:2px;' href="{:U('Analysis/outportLd',array('tid'=>3))}">
+            <div class='text-center'>{$year}-{$year+1}学年&nbsp;&nbsp;{$term}学期各单位领导听课评价结果统计</div>
+            <if condition="$Think.session.userRole lt 5">
+                <a class='btn btn-success btn-large' style='position: absolute;left:100px;top:2px;' href="{:U('Analysis/outportLd',array('tid'=>5))}">
         <i class='icon-share'>&nbsp;&nbsp;<strong>导出</strong></i>
     </a>
-    </if>         
+    </if>
         </div>
         <div class='box-content box-no-padding'>
             <div class='responsive-table'>
               <div class='scrollable-area' id="table_analysis">
-                <table class='table table-bordered table-hover table-striped' style='margin-bottom:0;' id="table1">
+                <table class='table table-bordered table-hover table-striped' style='margin-bottom:0;'>
                   <thead>
                     <!--tr>
                       <th colspan='26' style='text-align:center;'>2014-2015学年第一学期领导听课统计总表（按院系统计）</th>
                     </tr-->
                     <tr>
-                        <th rowspan='2'>序号</th>
-                        <th rowspan='2'>教师单位</th>
+                        <th rowspan='3'>序号</th>
+                        <th rowspan='3'>单位</th>
+                        <th rowspan='3'>领导姓名</th>
+                        <th rowspan='3'>工作证号</th>
+                        <th rowspan='3'>领导职务</th>
+                        <th rowspan='3'>本学期听课总次数</th>
                         <th colspan='7'>本研听课情况（门次）</th>
                         <th colspan='7'>本科课程听课情况（门次）</th>
-                        <th colspan='7'>研究生课程听课情况（门次）</th>
+                        <th colspan='7'>听课节数</th>
                     </tr>
                     <tr>
-                        <th>总计</th>
+                        <th rowspan='2'>本科课程听课次数</th>
+                        <th colspan='6'>对本科课程的总体评价</th>
+                        <th rowspan='2'>研究生课程听课次数</th>
+                        <th colspan='6'>对研究生课程的总体评价</th>
+                        <th rowspan='3'>听课总节数</th>
+                        <th rowspan='3'>本科课程</th>
+                        <th rowspan='3'>研究生课程</th>
+                    </tr>
+                    <tr>
                         <th>好</th>
                         <th>较好</th>
                         <th>一般</th>
                         <th>较差</th>
                         <th>差</th>
                         <th>空白</th>
-                        <th>总计</th>
-                        <th>好</th>
-                        <th>较好</th>
-                        <th>一般</th>
-                        <th>较差</th>
-                        <th>差</th>
-                        <th>空白</th>
-                        <th>总计</th>
                         <th>好</th>
                         <th>较好</th>
                         <th>一般</th>
@@ -92,15 +96,12 @@
                   <tbody>
                     <volist name="data" id="vo" key="i">
                     <tr>
-                        <td>{$i}</td>
-                        <td>{$vo.tcollege}</td>
+                        <td>{$i+$pagecount}</td>
+                        <td>{$vo.lcollege}</td>
+                        <td>{$vo.lname}</td>
+                        <td>{$vo.lduid}</td>
+                        <td>{$vo.pos}</td>
                         <td>{$vo.zj_zj}</td>
-                        <td>{$vo.zj_h}</td>
-                        <td>{$vo.zj_jh}</td>
-                        <td>{$vo.zj_yb}</td>
-                        <td>{$vo.zj_jc}</td>
-                        <td>{$vo.zj_c}</td>
-                        <td>{$vo.zj_k}</td>
                         <td>{$vo.bk_zj}</td>
                         <td>{$vo.bk_h}</td>
                         <td>{$vo.bk_j}</td>
@@ -115,6 +116,9 @@
                         <td>{$vo.yjs_jc}</td>
                         <td>{$vo.yjs_c}</td>
                         <td>{$vo.yjs_k}</td>
+                        <td>{$vo.ztkjs}</td>
+                        <td>{$vo.tkjsbk}</td>
+                        <td>{$vo.tkjsyjs}</td>
                     </tr>
                     </volist>
                     <!--tr>
@@ -122,6 +126,7 @@
                     </tr-->
                   </tbody>
                 </table>
+                <div class="pagination" style="margin: auto; width:725px;">{$page}</div>
               </div>
             </div>
       </div>
@@ -130,11 +135,10 @@
 </section>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#smanager').nav_slide('smanager','collegevalue');
+        $('#smanager').nav_slide('smanager','leaderdetailcount');
         $('#selYt').change(function(){
             $('#form1').submit();
         });
-        $('#table1').rowspan(1);
         $('#exportBtn').click(function(){
             $('#table_analysis').printArea();
         });

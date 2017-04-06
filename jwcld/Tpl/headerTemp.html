@@ -291,6 +291,14 @@
             </a>
         </li>
         </if>
+        <if condition="($Think.session.userRole eq 1) OR ($Think.session.userRole eq 2) OR ($Think.session.userRole eq 3)">
+        <li id="leaderdetailcount">
+            <a href='{:U('Analysis/leaderdetailcount')}'>
+                <i class='icon-caret-right'></i>
+                <span>各单位领导听课评价</span>
+            </a>
+        </li>
+        </if>
         <!--li id="course">
             <a href='{:U('Analysis/course')}'>
                 <i class='icon-caret-right'></i>

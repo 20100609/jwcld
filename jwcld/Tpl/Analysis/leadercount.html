@@ -13,7 +13,7 @@
             <div class='pull-right'>
                 <ul class='breadcrumb'>
                     <li>
-                        <a href="index.html"><i class='icon-bar-chart'></i>
+                        <a href="{:U('Index/index')}"><i class='icon-bar-chart'></i>
                         </a>
                     </li>
                     <li class='separator'>
@@ -43,7 +43,7 @@
 <div class='row-fluid'>
     <div class='span12 box bordered-box green-border' style='margin-bottom:0;'>
         <div class='box-header green-background'>
-            <div class='text-center'>{$year}-{$year+1}学年&nbsp;&nbsp;{$term}各级领导听课次数统计表</div>
+            <div class='text-center'>{$year}-{$year+1}学年&nbsp;&nbsp;{$term}学期各级领导听课次数统计表</div>
                     <if condition="$Think.session.userRole lt 5">
                 <a class='btn btn-success btn-large' style='position: absolute;left:100px;top:2px;' href="{:U('Analysis/outportLd',array('tid'=>4))}">
         <i class='icon-share'>&nbsp;&nbsp;<strong>导出</strong></i>
