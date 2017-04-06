@@ -344,8 +344,8 @@
                         <th rowspan='3'>工作证号</th>
                         <th rowspan='3'>领导职务</th>
                         <th rowspan='3'>本学期听课总次数</th>
-                        <th colspan='7'>本研听课情况（门次）</th>
-                        <th colspan='7'>本科课程听课情况（门次）</th>
+                        <th colspan='7'>研究生听课情况</th>
+                        <th colspan='7'>本科课程听课情况</th>
                         <th colspan='7'>听课节数</th>
                     </tr>
                     <tr>
