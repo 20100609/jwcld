@@ -286,137 +286,306 @@
 <div class='container-fluid'>
 <div class='row-fluid' id='content-wrapper'>
 <div class='span12'>
-<div class='row-fluid'>
-    <div class='span12'>
-        <div class='page-header'>
-            <h1 class='pull-left'>
-                <i class='icon-table'></i>
-                <span>数据报表</span>
-            </h1>
-            <div class='pull-right'>
-                <ul class='breadcrumb'>
-                    <li>
-                        <a href="<?php echo U('Index/index');?>"><i class='icon-bar-chart'></i>
-                        </a>
-                    </li>
-                    <li class='separator'>
-                        <i class='icon-angle-right'></i>
-                    </li>
-                    <li class='active'>按院系月份统计</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<div class='row-fluid' style="margin-bottom:5px;">
-<div class='span4 pull-right'>
     <div class='row-fluid'>
-        <strong>学年学期</strong>
-        <form id="form1" method="post" action="<?php echo U('Analysis/collegevalue');?>">
-            <select class='select2 input-block-level' name="yt" id="selYt">
-                <option value='-1' selected="selected"/>------请选择------
-                <?php if(is_array($yt)): $i = 0; $__LIST__ = $yt;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["value"]); ?>"><?php echo ($vo["item"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
-            </select>
-        </form>
-    </div>
-</div>
-</div>
-<div class='row-fluid'>
-    <div class='span12 box bordered-box green-border' style='margin-bottom:0;'>
-        <div class='box-header green-background'>
-            <div class='text-center'><?php echo ($year); ?>-<?php echo ($year+1); ?>学年&nbsp;&nbsp;<?php echo ($term); ?>学期领导听课统计总表（按院系、评价统计）</div>
-        <?php if($_SESSION['userRole']< 5): ?><a class='btn btn-success btn-large' style='position: absolute;left:100px;top:2px;' href="<?php echo U('Analysis/outportLd',array('tid'=>3));?>">
-        <i class='icon-share'>&nbsp;&nbsp;<strong>导出</strong></i>
-    </a><?php endif; ?>         
-        </div>
-        <div class='box-content box-no-padding'>
-            <div class='responsive-table'>
-              <div class='scrollable-area' id="table_analysis">
-                <table class='table table-bordered table-hover table-striped' style='margin-bottom:0;' id="table1">
-                  <thead>
-                    <!--tr>
-                      <th colspan='26' style='text-align:center;'>2014-2015学年第一学期领导听课统计总表（按院系统计）</th>
-                    </tr-->
-                    <tr>
-                        <th rowspan='2'>序号</th>
-                        <th rowspan='2'>教师单位</th>
-                        <th colspan='7'>本研听课情况（门次）</th>
-                        <th colspan='7'>本科课程听课情况（门次）</th>
-                        <th colspan='7'>研究生课程听课情况（门次）</th>
-                    </tr>
-                    <tr>
-                        <th>总计</th>
-                        <th>好</th>
-                        <th>较好</th>
-                        <th>一般</th>
-                        <th>较差</th>
-                        <th>差</th>
-                        <th>空白</th>
-                        <th>总计</th>
-                        <th>好</th>
-                        <th>较好</th>
-                        <th>一般</th>
-                        <th>较差</th>
-                        <th>差</th>
-                        <th>空白</th>
-                        <th>总计</th>
-                        <th>好</th>
-                        <th>较好</th>
-                        <th>一般</th>
-                        <th>较差</th>
-                        <th>差</th>
-                        <th>空白</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-                        <td><?php echo ($i); ?></td>
-                        <td><?php echo ($vo["tcollege"]); ?></td>
-                        <td><?php echo ($vo["zj_zj"]); ?></td>
-                        <td><?php echo ($vo["zj_h"]); ?></td>
-                        <td><?php echo ($vo["zj_jh"]); ?></td>
-                        <td><?php echo ($vo["zj_yb"]); ?></td>
-                        <td><?php echo ($vo["zj_jc"]); ?></td>
-                        <td><?php echo ($vo["zj_c"]); ?></td>
-                        <td><?php echo ($vo["zj_k"]); ?></td>
-                        <td><?php echo ($vo["bk_zj"]); ?></td>
-                        <td><?php echo ($vo["bk_h"]); ?></td>
-                        <td><?php echo ($vo["bk_j"]); ?></td>
-                        <td><?php echo ($vo["bk_yb"]); ?></td>
-                        <td><?php echo ($vo["bk_jc"]); ?></td>
-                        <td><?php echo ($vo["bk_c"]); ?></td>
-                        <td><?php echo ($vo["bk_k"]); ?></td>
-                        <td><?php echo ($vo["yjs_zj"]); ?></td>
-                        <td><?php echo ($vo["yjs_h"]); ?></td>
-                        <td><?php echo ($vo["yjs_j"]); ?></td>
-                        <td><?php echo ($vo["yjs_yb"]); ?></td>
-                        <td><?php echo ($vo["yjs_jc"]); ?></td>
-                        <td><?php echo ($vo["yjs_c"]); ?></td>
-                        <td><?php echo ($vo["yjs_k"]); ?></td>
-                    </tr><?php endforeach; endif; else: echo "" ;endif; ?>
-                    <!--tr>
-                        <td colspan='26' style="text-align:center;">备注：多位领导同时听同一门课程，计作多门次；其评价结果不一致时，采取多数人的意见。如同等人数的意见不一致时，采取从严原则，同时参考评语。</td>
-                    </tr-->
-                  </tbody>
-                </table>
-              </div>
+        <div class='span12'>
+            <div class='page-header'>
+                <h1 class='pull-left'>
+                    <i class='icon-tasks'></i>
+                    <span>已填的听课记录</span>
+                </h1>
             </div>
-      </div>
+        </div>
     </div>
+
+    <form method="post" action="<?php echo U('Task/showTask');?>">
+    <?php if($_SESSION['userRole']== 1): ?><div id="search">
+    <div class='row-fluid'>
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>课程名称</strong>
+            <input class='input-block-level' name="cname" type="text" />
+        </div>
+    </div>
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>教师名称</strong>
+            <input class='input-block-level' name="teaname" type="text" />
+        </div>
+    </div>
+    <?php if($_SESSION['userRole']< 4): ?><div class='span4'>
+        <div class='row-fluid'>
+            <strong>教师单位</strong>
+            <select class='select2 input-block-level' name='tcollege'>
+                <option value='-1' />------请选择------
+                <?php if(is_array($tcollege)): $i = 0; $__LIST__ = $tcollege;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo3): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo3["college"]); ?>"><?php echo ($vo3["college"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+            </select>
+        </div>
+    </div><?php endif; ?>
+    </div>
+
+    <div class='row-fluid' style="margin-top:10px; margin-bottom:2px;">
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>听课月份</strong>
+            <select class='select2 input-block-level' name='tkmonth'>
+                <option value='-1' />------请选择------
+                <option value="1">1月</option>
+                <option value="2">2月</option>
+                <option value="3">3月</option>
+                <option value="4">4月</option>
+                <option value="5">5月</option>
+                <option value="6">6月</option>
+                <option value="7">7月</option>
+                <option value="8">8月</option>
+                <option value="9">9月</option>
+                <option value="10">10月</option>
+                <option value="10">10月</option>
+                <option value="12">12月</option>
+            </select>
+        </div>
+    </div>
+    <?php if($_SESSION['userRole']<= 4): ?><div class='span4'>
+        <div class='row-fluid'>
+            <strong>学生院系</strong>
+            <select class='select2 input-block-level' name='scollege'>
+                <option value='-1' />------请选择------
+                <?php if(is_array($scollege)): $i = 0; $__LIST__ = $scollege;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo5): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo5["college"]); ?>"><?php echo ($vo5["college"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+            </select>
+        </div>
+    </div><?php endif; ?>
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>领导</strong>
+            <select class='select2 input-block-level' name='lname'>
+                <option value='-1' />------请选择------
+                <?php if(is_array($lname)): $i = 0; $__LIST__ = $lname;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo6): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo6["lname"]); ?>"><?php echo ($vo6["lname"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-defalut pull-right" style="margin:17px 194px 0px 0px;" type="submit">检索 | Search</button>
+    </div>
+    </div><?php endif; ?>
+    <?php if(($_SESSION['userRole']>= 2) and ($_SESSION['userRole']<= 4)): ?><div id="search">
+    <div class='row-fluid'>
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>课程名称</strong>
+            <input class='input-block-level' name="cname" type="text" />
+        </div>
+    </div>
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>教师名称</strong>
+            <input class='input-block-level' name="teaname" type="text" />
+        </div>
+    </div>
+    <?php if($_SESSION['userRole']<= 4): ?><div class='span4'>
+        <div class='row-fluid'>
+            <strong>教师单位</strong>
+            <select class='select2 input-block-level' name='tcollege'>
+                <option value='-1' />------请选择------
+                <?php if(is_array($tcollege)): $i = 0; $__LIST__ = $tcollege;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo3): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo3["college"]); ?>"><?php echo ($vo3["college"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+            </select>
+        </div>
+    </div><?php endif; ?>
+    </div>
+
+    <div class='row-fluid' style="margin-top:10px; margin-bottom:2px;">
+    <div class='span3'>
+        <div class='row-fluid'>
+            <strong>听课月份</strong>
+            <select class='select2 input-block-level' name='tkmonth'>
+                <option value='-1' />------请选择------
+                <option value="1">1月</option>
+                <option value="2">2月</option>
+                <option value="3">3月</option>
+                <option value="4">4月</option>
+                <option value="5">5月</option>
+                <option value="6">6月</option>
+                <option value="7">7月</option>
+                <option value="8">8月</option>
+                <option value="9">9月</option>
+                <option value="10">10月</option>
+                <option value="10">10月</option>
+                <option value="12">12月</option>
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-defalut pull-right" style="margin:17px 194px 0px 0px;" type="submit">检索 | Search</button>
+    </div>
+    </div>
+       <!-- <input type="hidden" name="flag" value=1 />
+        <button class="btn btn-large btn-success" type="submit" style="margin:0px 0px 5px 20px;">查看本组听课记录</button> --><?php endif; ?>
+    </form>
+</div>
+
+<div class='row-fluid'>
+<div class='span12 box bordered-box green-border' style='margin-bottom:0;'>
+<div class='box-header green-background'>
+    <div class='text-center'>
+        听课任务列表
+    </div>   
+</div>
+<div class='box-content box-no-padding'>
+    <div class='responsive-table'>
+        <div class='scrollable-area'>
+            <table class='table table-bordered table-hover table-striped' style='margin-bottom:0;'>
+                <thead>
+                <tr>
+                    <td><strong>上课周次</strong></td>
+                    <td><strong>上课时间</strong></td>
+                    <td><strong>上课地点</strong></td>
+                    <td><strong>课程名称</strong></td>
+                    <td><strong>教师姓名</strong></td>
+                    <td><strong>教师单位</strong></td>
+                    <!-- <td><strong>学生院系</strong></td> -->
+                    <td><strong>课程类别</strong></td>                   
+                    <td><strong>听课时间</strong></td>
+                    <td><strong>培养层次</strong></td>
+                    <td><strong>听课领导</strong></td>
+                    <td style="text-align:center;"><strong>审核状态</strong></td>
+                    <td><strong>听课记录</strong></td>
+                    <?php if($_SESSION['userRole']== 1): ?><td><strong>修改任务</strong></td><?php endif; ?>
+                    <td><strong>填写记录</strong></td>
+                    <td><strong>删除任务</strong></td>
+                </tr>
+                </thead>
+                <tbody>
+                <?php if(is_array($tlist)): $i = 0; $__LIST__ = $tlist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo1): $mod = ($i % 2 );++$i;?><tr>
+                        <td><?php echo ($vo1["week"]); ?></td>
+                        <td><?php echo ($vo1["ctime"]); ?></td>
+                        <td><?php echo ($vo1["cplace"]); ?></td>
+                        <td><?php echo ($vo1["cname"]); ?></td>
+                        <td><?php echo ($vo1["tname"]); ?></td>
+                        <td><?php echo ($vo1["tcollege"]); ?></td>                        
+                        <!-- <td><?php echo ($vo1["scollege"]); ?></td> -->
+                        <td><?php echo ($vo1["category1"]); ?>&nbsp;|&nbsp;<?php echo ($vo1["category2"]); ?></td>
+                        <td><?php echo ($vo1["tktime"]); ?></td>
+                        <td style="text-align:center;">
+                          <?php if($vo1['pycc'] == 1): ?>本科
+                          <?php else: ?>研究生<?php endif; ?>
+                        </td>
+                        <td style="text-align:center;">
+                            <!-- <a class='btn' data-toggle='modal' href='#editLd' role='button'><?php echo ($vo1["lname"]); ?></a> -->
+                            <?php echo ($vo1["lname"]); ?>
+                        </td>
+                        <td style="text-align:center;">  
+                            <?php if($vo1['pass'] != 1): ?>待审核
+                            <?php else: ?>已通过<?php endif; ?>                    
+                        </td>
+                        <?php if(($vo1['record'] == 1) and ($vo1['save'] == 0)): ?><td>已保存记录请及时提交</td>
+                            <?php elseif(($vo1['record'] == 1) and ($vo1['save'] == 1)): ?><td>已填写记录</td>
+                            <?php else: ?><td>未填写记录</td><?php endif; ?>
+                        <?php if($_SESSION['userRole']== 1): ?><td>
+                            <div class='text-center'>
+                                <?php if($vo1['record'] == 0): ?><a class='btn btn-warning btn-mini' href="<?php echo U('Task/taskinfo',array('tid'=>$vo1['tid']));?>">
+                                        修改
+                                    </a>
+                                <?php else: ?>
+                                    无法修改<?php endif; ?>
+                            </div>
+                        </td><?php endif; ?>
+                        <td>
+                            <div class='text-center'>
+                                <?php if($_SESSION['userRole']== 1): if($vo1['record'] == 0): ?><a class='btn btn-success btn-mini' href="<?php echo U('Task/addRecordT',array('tid'=>$vo1['tid']));?>">
+                                            填写
+                                        </a>
+                                    <?php else: ?>
+                                        <a class='btn btn-primary btn-mini' href="<?php echo U('Task/editRecordT',array('tid'=>$vo1['tid']));?>">
+                                            修改
+                                        </a><?php endif; ?>
+                                <?php else: ?>
+                                    <?php if($vo1['pass'] == 1): ?><a class='btn btn-default btn-mini' href="<?php echo U('Record/viewRecord',array('tid'=>$vo1['tid']));?>">
+                                                查看
+                                        </a>
+                                    <?php else: ?>
+                                        <?php if($_SESSION['userName']== $vo1['lname']): if($vo1['record'] == 0): ?><a class='btn btn-success btn-mini' href="<?php echo U('Task/addRecordT',array('tid'=>$vo1['tid']));?>">
+                                                    填写
+                                                </a>
+                                            <?php else: ?>
+                                                <a class='btn btn-primary btn-mini' href="<?php echo U('Task/editRecordT',array('tid'=>$vo1['tid']));?>">
+                                                    修改
+                                                </a><?php endif; ?>
+                                        <?php else: ?>
+                                            <a class='btn btn-default btn-mini' href="<?php echo U('Record/viewRecord',array('tid'=>$vo1['tid']));?>">
+                                                查看
+                                            </a><?php endif; endif; endif; ?>
+                            </div>
+                        </td>
+                        <?php if((($_SESSION['userRole']== 1) and ($vo1['record'] == 0)) or (($_SESSION['userRole']== 1) and ($vo1['save'] == 0))): ?><td>
+                            <div class='text-center'>
+                                <a class='btn btn-danger btn-mini' href="javascript:if(confirm('确实要删除吗?'))location='<?php echo U('Task/delTask',array('tid'=>$vo1['tid']));?>'">
+                                    <i class='icon-remove'></i>
+                                </a>
+                            </div>
+                        </td>
+                        <?php elseif(($_SESSION['userRole']== 2) and ($vo1['save'] == 0)): ?>
+                        <td>
+                            <div class='text-center'>
+                                <a class='btn btn-danger btn-mini' href="javascript:if(confirm('确实要删除吗?'))location='<?php echo U('Task/delTaskLd',array('tid'=>$vo1['tid']));?>'">
+                                    <i class='icon-remove'></i>
+                                </a>
+                            </div>
+                        </td><?php endif; ?>
+                    </tr>
+    
+    <div class='modal hide fade' id='editLd' role='dialog' tabindex='-1'>
+        <div class='modal-header'>
+        <button class='close' data-dismiss='modal' type='button'>&times;</button>
+            <h3>修改听课专家[领导]</h3>
+        </div>
+        <div class='modal-body'> 
+            <ul class="nav nav-list">
+                <strong>
+                    <div class="text-center pull-left" style="width:65px;">姓名&nbsp;</div><div class="text-center pull-left" style="width:55px;">职称&nbsp;</div><div class="text-center pull-left" style="width:100px;">手机&nbsp;</div><div class="pull-left" style="width:280px;">所在院系</div>
+                </strong>
+                    <hr style="margin:5px;"/>
+                <?php if(is_array($ld)): $i = 0; $__LIST__ = $ld;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo2): $mod = ($i % 2 );++$i;?><div style="clear:both; float:none;"></div>
+                    <li>
+                        <a href="<?php echo U('Task/editTaskld',array('tid'=>$vo1['tid'],'lid'=>$vo2['lid']));?>" style="height:20px;">
+                        <div class="text-center pull-left" style="width:65px;"><?php echo ($vo2["name"]); ?>&nbsp;</div>
+                        <div class="text-center pull-left" style="width:55px;"><?php echo ($vo2["title"]); ?>&nbsp;</div>
+                        <div class="text-center pull-left" style="width:100px;"><?php echo ($vo2["mobi"]); ?>&nbsp;</div>
+                        <div class="pull-left" style="width:280px;"><?php echo ($vo2["college"]); ?></div>
+                    </a><hr style="margin:5px;"/></li><?php endforeach; endif; else: echo "" ;endif; ?>
+            </ul>                     
+        </div>
+        <div class='modal-footer'>
+            <!--button class='btn btn-primary' type='submit'>添加</button-->
+            <button class='btn' data-dismiss='modal'>关闭</button>
+        </div>
+        <!--/form-->
+    </div><?php endforeach; endif; else: echo "" ;endif; ?>
+                </tbody>
+            </table>
+            <div class="pagination" style="margin: auto; width:725px;"><?php echo ($page); ?></div>
+        </div>
+    </div>
+</div>
+</div>
+</div>      
+</div>
+</div>
 </div>
 </section>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#smanager').nav_slide('smanager','collegevalue');
-        $('#selYt').change(function(){
-            $('#form1').submit();
-        });
-        $('#table1').rowspan(1);
-        $('#exportBtn').click(function(){
-            $('#table_analysis').printArea();
+        $("#tmanager").nav_slide('tmanager','showTask');
+        $(".edittime").change(function(){
+            alert('ding!');
+            var p = [];
+            p.tktime = $(this).val();
+            p.tid = $(this).attr('myid');
+            var url = "__URL__/editTasktime";
+            $.post(url,p,function(e){
+                if(e.code == "0"){
+                    alert(e.message);
+                }
+            });
+
         });
     });
-</script>
+</script>  
 </div>
 <!-- /print area -->
 <script src="/jwcld/Public/js/jquery.PrintArea.js" type="text/javascript"></script>

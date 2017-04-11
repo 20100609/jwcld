@@ -47,8 +47,13 @@
 		    $objPHPExcel->getActiveSheet()->mergeCells($Letter[0].'1:'.$Letter[$length1-1].'1');      // 首行信息合并
 	
 		    $objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1',$nameArr[0][0]);
+		    //标题居中
 		    $objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		    $objPHPExcel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+		    //表头居中
+		    $objPHPExcel->getActiveSheet()->getStyle('A2:'.$Letter[$length1-1].$NameHeight)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		    //$objPHPExcel->getActiveSheet()->getStyle('A2:'.$Letter[$length1-1].$NameHeight)->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+		    
 		    $objPHPExcel->getActiveSheet()->getDefaultColumnDimension()->setWidth(15);
 		    $objPHPExcel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(30);
 		    $objPHPExcel->getActiveSheet()->getStyle('A2:AS2')->getAlignment()->setWrapText(TRUE);
@@ -56,29 +61,76 @@
 		    $objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(30);
 		    $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15);
 
-		    if($type==1){
+		    if($type==1){ //case 2&4 领导听课次数统计总表
+			    
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[0].'2:'.$Letter[0].'3');
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[1].'2:'.$Letter[1].'3');
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[2].'2:'.$Letter[2].'3');
 			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[3].'2:'.$Letter[5].'2');  
 			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[6].'2:'.$Letter[8].'2');
 				for($i = 0; $i < 2; $i++){
 					$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i*3+3].'2',$nameArr[1][$i]);
 				}
-				for($i = 0; $i < $length1; $i++){
+				for($i = 0; $i < 3; $i++){
+						$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i].'2',$nameArr[$NameHeight-1][$i]);
+					}
+				for($i = 3; $i < $length1; $i++){
 						$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i].$NameHeight,$nameArr[$NameHeight-1][$i]);
 					}
 			}
-			elseif($type==2){
+			elseif($type==2){ //case 3&5 领导听课评价统计总表
 				$objPHPExcel->getActiveSheet()->getDefaultColumnDimension()->setWidth(11);
+				$objPHPExcel->getActiveSheet()->mergeCells($Letter[0].'2:'.$Letter[0].'3');
+				$objPHPExcel->getActiveSheet()->mergeCells($Letter[1].'2:'.$Letter[1].'3');
 			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[2].'2:'.$Letter[8].'2');  
 			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[9].'2:'.$Letter[15].'2');
 			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[16].'2:'.$Letter[22].'2');
 				for($i = 0; $i < 3; $i++){
 					$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i*7+2].'2',$nameArr[1][$i]);
 				}
-				for($i = 0; $i < $length1; $i++){
+				for($i = 0; $i < 2; $i++){
+						$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i].'2',$nameArr[$NameHeight-1][$i]);
+				}
+				for($i = 2; $i < $length1; $i++){
 						$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i].$NameHeight,$nameArr[$NameHeight-1][$i]);
 					}
 			}
-			else{
+			//20170409添加导出各单位领导听课评价结果统计表格式 begin
+			elseif($type==3){ //case 6 各单位领导听课评价结果统计表
+				$objPHPExcel->getActiveSheet()->getDefaultColumnDimension()->setWidth(11);
+				for($k = 0; $k < 6; $k++){
+					$objPHPExcel->getActiveSheet()->mergeCells($Letter[$k].'2:'.$Letter[$k].'4');
+				}
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[6].'2:'.$Letter[12].'2');  
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[13].'2:'.$Letter[19].'2');
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[20].'2:'.$Letter[22].'2');
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[7].'3:'.$Letter[12].'3');
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[14].'3:'.$Letter[19].'3'); 
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[6].'3:'.$Letter[6].'4');
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[13].'3:'.$Letter[13].'4');
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[20].'3:'.$Letter[20].'4');
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[21].'3:'.$Letter[21].'4');
+			    $objPHPExcel->getActiveSheet()->mergeCells($Letter[22].'3:'.$Letter[22].'4');
+			    //teaid工作证号所在列 设置文本格式 避免数字乱码
+			    $objPHPExcel->getActiveSheet()->getStyle('D')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
+				
+				for($i = 0; $i < 6; $i++){
+					$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i].'2',$nameArr[3][$i]);
+					$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i+7].$NameHeight,$nameArr[$NameHeight-1][$i+7]);
+					$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i+14].$NameHeight,$nameArr[$NameHeight-1][$i+14]);
+				}
+				for($i = 0; $i < 3; $i++){
+					$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i*7+6].'2',$nameArr[1][$i]);
+					$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i+20].'3',$nameArr[$NameHeight-1][$i+20]);
+				}
+				for($i = 0; $i < 2; $i++){
+						$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i*7+7].'3',$nameArr[2][$i]);
+						$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i*7+6].'3',$nameArr[$NameHeight-1][$i*7+6]);
+					}
+			}
+			//20170409添加导出各单位领导听课评价结果统计表格式 end
+			
+			else{ //普通格式单行表头无合并单元格
 				$objPHPExcel->getActiveSheet()->getDefaultColumnDimension()->setWidth(13);
 				for($i = 0; $i < $length1; $i++){
 					$objPHPExcel->setActiveSheetIndex(0)->setCellValue($Letter[$i].$NameHeight,$nameArr[$NameHeight-1][$i]);

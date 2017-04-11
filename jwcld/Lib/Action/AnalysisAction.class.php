@@ -235,7 +235,7 @@ class AnalysisAction extends Action {
                     break;
         //2院系听课次数统计
         case 2:     $namearray=array(
-                    0=>array($year."-".($year+1).$term."学期"."领导听课统计总表（按院系统计）"),
+                    0=>array($year."-".($year+1).$term."学期"."领导听课次数统计总表（按院系统计）"),
                     1=>array(
                         "听课次数",
                         "听课节数"),
@@ -275,11 +275,11 @@ class AnalysisAction extends Action {
                                 "tkjsbk",
                                 "tkjsyjs"
                         );
-                    $title = $year."-".($year+1).$term."学期"."领导听课统计总表（按院系统计）";
-                    $filename = $year."-".($year+1).$term."学期"."领导听课统计总表（按院系统计）".$date.".xls";
+                    $title = $year."-".($year+1).$term."学期"."领导听课次数统计总表（按院系统计）";
+                    $filename = $year."-".($year+1).$term."学期"."领导听课次数统计总表（按院系统计）".$date.".xls";
                     $type=1;
                     break;
-        //院系评价结果统计
+        //3院系评价结果统计
         case 3:   $namearray=array(
                     0=>array($year."-".($year+1).$term."学期"."领导听课统计总表（按院系、评价统计）"),
                     1=>array(
@@ -405,7 +405,7 @@ class AnalysisAction extends Action {
                     break;
         //5各级领导评价结果统计
         case 5:     $namearray=array(
-                    0=>array($year."-".($year+1).$term."学期"."领导听课统计总表（按各级领导评价统计）总表"),
+                    0=>array($year."-".($year+1).$term."学期"."领导听课统计总表（按各级领导评价统计）"),
                     1=>array("本研听课情况（门次）",
                         "本科课程听课情况（门次）",
                         "研究生课程听课情况（门次）"),
@@ -486,13 +486,104 @@ class AnalysisAction extends Action {
                                 "yjs_c",
                                 "yjs_k"
                         );
-                    $title = $year."-".($year+1).$term."学期"."领导听课统计总表（按各级领导评价统计）总表";
-                    $filename = $year."-".($year+1).$term."学期"."领导听课统计总表（按各级领导评价统计）总表".$date.".xls";
+                    $title = $year."-".($year+1).$term."学期"."领导听课统计总表（按各级领导评价统计）";
+                    $filename = $year."-".($year+1).$term."学期"."领导听课统计总表（按各级领导评价统计）".$date.".xls";
                     $type=2;
                     break;
-        //20170327 添加导出领导用户信息 begin
-        //6导出领导用户信息
-        case 6:     $namearray = array(
+
+         //20170409添加导出各单位领导听课评价结果统计表 begin
+         //6各单位领导听课评价结果统计           
+         case 6:     $namearray=array(
+                    0=>array($year."-".($year+1).$term."学期"."各单位领导听课评价结果统计表"),
+                    1=>array("研究生听课情况",
+                        "本科生听课情况",
+                        "听课节数"),
+                    2=>array("对本科课程的总体评价",
+                        "对研究生课程的总体评价"),
+                    3=>array("序号",
+                                "单位",
+                                "领导姓名",
+                                "工作证号",
+                                "领导职务",
+                                "本学期听课总次数",
+                                "本科课程听课次数",
+                                "好",
+                                "较好",
+                                "一般",
+                                "较差",
+                                "差",
+                                "空白",
+                                "研究生课程听课次数",
+                                "好",
+                                "较好",
+                                "一般",
+                                "较差",
+                                "差",
+                                "空白",
+                                "听课总节数",
+                                "本科课程",
+                                "研究生课程"
+                            )
+                            );
+                            $con['year'] = $year;
+                            $con['term'] = $term;
+
+                            /*if ($userRole == 4) {
+                                $con0['uid'] = $userid;
+                                $collegeData = $user->where($con0)->select();
+                                //$con2['scollege'] = $collegeData[0]['college'];
+                                // $con2['tcollege'] = $collegeData[0]['college'];
+                                // $con2['_logic'] = 'OR';
+                                // $con['_complex']= $con2;
+                                $con['tcollege'] = $collegeData[0]['college'];
+                            }*/
+                            
+                            $hz_leaderdetailcount = M('hz_leaderdetailcount');
+                            $data = $hz_leaderdetailcount->where($con)->select();
+
+                            for($i=0; $i<count($data,0); $i++){
+                                $data[$i]["teaid"] = " ".strval($data[$i]["teaid"]); //左侧加空格保护首位0不被吞
+                                /*$check = strval($data[$i]["teaid"]);
+                                if(strlen($check)<=5 && strcmp($check,"xxld")!=0 && strcmp($check,"bmld")!=0 && strcmp($check,"xyld")!=0){
+                                    $data[$i]["teaid"] = " ".$check;
+                                }
+                                else{
+                                    $data[$i]["teaid"] = $check;
+                                }*/ 
+                            }
+
+                            $attrArray=array('',
+                                "lcollege",
+                                "lname",
+                                "teaid",
+                                "pos",
+                                "zj_zj",
+                                "bk_zj",
+                                "bk_h}",
+                                "bk_j",
+                                "bk_yb",
+                                "bk_jc",
+                                "bk_c",
+                                "bk_k",
+                                "yjs_zj",
+                                "yjs_h",
+                                "yjs_j",
+                                "yjs_yb",
+                                "yjs_jc",
+                                "yjs_c",
+                                "yjs_k",
+                                "ztkjs",
+                                "tkjsbk",
+                                "tkjsyjs"
+                        );
+                    $title = $year."-".($year+1).$term."学期"."各单位领导听课评价结果统计表";
+                    $filename = $year."-".($year+1).$term."学期"."各单位领导听课评价结果统计表".$date.".xls";
+                    $type=3;
+                    break;
+        //20170409添加导出各单位领导听课评价结果统计表 end
+
+        //11导出领导用户信息
+        case 11:     $namearray = array(
                     0=>array($year."-".($year+1).$term."学期"."听课领导用户信息"),
                     1=>array("序号",
                         "工作证号",
@@ -530,9 +621,8 @@ class AnalysisAction extends Action {
                     
                     $title = $year."-".($year+1).$term."学期"."听课领导用户信息";
                     $filename = $year."-".($year+1).$term."学期"."听课领导用户信息".$date.".xls";
-                    $type=3;
-                    break;
-            //20170327添加导出领导用户信息 end 
+                    $type=0;
+                    break; 
         }        
        //dump($data);
        //return
@@ -823,7 +913,7 @@ class AnalysisAction extends Action {
             $count = $hz_leaderdetailcount->where($con)->count();
             $Page = new Page($count,10);
             $Page->setConfig("theme","<ul class='pagination'><li><span>%nowPage%/%totalPage% 页</span></li> %first% %prePage% %linkPage% %nextPage% %end%</ul>");
-            $data = $hz_leaderdetailcount->where($con)->order('lduid asc')->limit($Page->firstRow.','.$Page->listRows)->select();
+            $data = $hz_leaderdetailcount->where($con)->order('teaid asc')->limit($Page->firstRow.','.$Page->listRows)->select();
             $this->yt = get_year_term();
             $this->pagecount = $Page->firstRow;
             $this->page = $Page->show();

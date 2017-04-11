@@ -265,6 +265,12 @@
                 <span>各级领导评价结果统计</span>
             </a>
         </li><?php endif; ?>
+        <?php if(($_SESSION['userRole']== 1) OR ($_SESSION['userRole']== 2) OR ($_SESSION['userRole']== 3)): ?><li id="leaderdetailcount">
+            <a href='<?php echo U('Analysis/leaderdetailcount');?>'>
+                <i class='icon-caret-right'></i>
+                <span>各单位领导听课评价</span>
+            </a>
+        </li><?php endif; ?>
         <!--li id="course">
             <a href='<?php echo U('Analysis/course');?>'>
                 <i class='icon-caret-right'></i>

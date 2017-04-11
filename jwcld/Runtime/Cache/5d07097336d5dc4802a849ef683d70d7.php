@@ -265,6 +265,12 @@
                 <span>各级领导评价结果统计</span>
             </a>
         </li><?php endif; ?>
+        <?php if(($_SESSION['userRole']== 1) OR ($_SESSION['userRole']== 2) OR ($_SESSION['userRole']== 3)): ?><li id="leaderdetailcount">
+            <a href='<?php echo U('Analysis/leaderdetailcount');?>'>
+                <i class='icon-caret-right'></i>
+                <span>各单位领导听课评价</span>
+            </a>
+        </li><?php endif; ?>
         <!--li id="course">
             <a href='<?php echo U('Analysis/course');?>'>
                 <i class='icon-caret-right'></i>
@@ -298,12 +304,9 @@
                     <div class='span12 box bordered-box orange-border' style='margin-bottom:0;'>
                         <div class='box-header green-background'>
                             <div class='text-center'>本学期听课领导用户信息</div>
-
-                            <!--20170327添加导出 begin-->
-                            <a class='btn btn-success btn-large' style='position: absolute;left:0px;top:2px;' href="<?php echo U('Analysis/outportLd',array('tid'=>6));?>">
+                            <a class='btn btn-success btn-large' style='position: absolute;left:0px;top:2px;' href="<?php echo U('Analysis/outportLd',array('tid'=>11));?>">
                             <i class='icon-share'>&nbsp;&nbsp;<strong>导出</strong></i>
                             </a>                            
-                            <!--20170327添加导出 end-->
                         </div>
                         <div class='box-content box-no-padding'>
                             <div class='responsive-table'>

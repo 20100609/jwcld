@@ -29,7 +29,7 @@
 <div class='span4 pull-right'>
     <div class='row-fluid'>
         <strong>学年学期</strong>
-        <form id="form1" method="post" action="{:U('Analysis/leadervalue')}">
+        <form id="form1" method="post" action="{:U('Analysis/leaderdetailcount')}">
             <select class='select2 input-block-level' name="yt" id="selYt">
                 <option value='-1' selected="selected"/>------请选择------
                 <volist name="yt" id="vo">
@@ -45,7 +45,7 @@
         <div class='box-header green-background'>
             <div class='text-center'>{$year}-{$year+1}学年&nbsp;&nbsp;{$term}学期各单位领导听课评价结果统计</div>
             <if condition="$Think.session.userRole lt 5">
-                <a class='btn btn-success btn-large' style='position: absolute;left:100px;top:2px;' href="{:U('Analysis/outportLd',array('tid'=>5))}">
+                <a class='btn btn-success btn-large' style='position: absolute;left:100px;top:2px;' href="{:U('Analysis/outportLd',array('tid'=>6))}">
         <i class='icon-share'>&nbsp;&nbsp;<strong>导出</strong></i>
     </a>
     </if>
@@ -99,7 +99,7 @@
                         <td>{$i+$pagecount}</td>
                         <td>{$vo.lcollege}</td>
                         <td>{$vo.lname}</td>
-                        <td>{$vo.lduid}</td>
+                        <td>{$vo.teaid}</td>
                         <td>{$vo.pos}</td>
                         <td>{$vo.zj_zj}</td>
                         <td>{$vo.bk_zj}</td>

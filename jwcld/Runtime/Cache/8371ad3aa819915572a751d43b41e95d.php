@@ -324,7 +324,7 @@
 <div class='row-fluid'>
     <div class='span12 box bordered-box green-border' style='margin-bottom:0;'>
         <div class='box-header green-background'>
-            <div class='text-center'><?php echo ($year); ?>-<?php echo ($year+1); ?>学年&nbsp;&nbsp;<?php echo ($term); ?>领导听课统计总表（按各级领导评价统计）总表</div>
+            <div class='text-center'><?php echo ($year); ?>-<?php echo ($year+1); ?>学年&nbsp;&nbsp;<?php echo ($term); ?>学期领导听课统计总表（按各级领导评价统计）总表</div>
             <?php if($_SESSION['userRole']< 5): ?><a class='btn btn-success btn-large' style='position: absolute;left:100px;top:2px;' href="<?php echo U('Analysis/outportLd',array('tid'=>5));?>">
         <i class='icon-share'>&nbsp;&nbsp;<strong>导出</strong></i>
     </a><?php endif; ?>

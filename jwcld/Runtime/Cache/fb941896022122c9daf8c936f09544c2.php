@@ -312,7 +312,7 @@
 <div class='span4 pull-right'>
     <div class='row-fluid'>
         <strong>学年学期</strong>
-        <form id="form1" method="post" action="<?php echo U('Analysis/leadervalue');?>">
+        <form id="form1" method="post" action="<?php echo U('Analysis/leaderdetailcount');?>">
             <select class='select2 input-block-level' name="yt" id="selYt">
                 <option value='-1' selected="selected"/>------请选择------
                 <?php if(is_array($yt)): $i = 0; $__LIST__ = $yt;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["value"]); ?>"><?php echo ($vo["item"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
@@ -325,7 +325,7 @@
     <div class='span12 box bordered-box green-border' style='margin-bottom:0;'>
         <div class='box-header green-background'>
             <div class='text-center'><?php echo ($year); ?>-<?php echo ($year+1); ?>学年&nbsp;&nbsp;<?php echo ($term); ?>学期各单位领导听课评价结果统计</div>
-            <?php if($_SESSION['userRole']< 5): ?><a class='btn btn-success btn-large' style='position: absolute;left:100px;top:2px;' href="<?php echo U('Analysis/outportLd',array('tid'=>5));?>">
+            <?php if($_SESSION['userRole']< 5): ?><a class='btn btn-success btn-large' style='position: absolute;left:100px;top:2px;' href="<?php echo U('Analysis/outportLd',array('tid'=>6));?>">
         <i class='icon-share'>&nbsp;&nbsp;<strong>导出</strong></i>
     </a><?php endif; ?>
         </div>
@@ -377,7 +377,7 @@
                         <td><?php echo ($i+$pagecount); ?></td>
                         <td><?php echo ($vo["lcollege"]); ?></td>
                         <td><?php echo ($vo["lname"]); ?></td>
-                        <td><?php echo ($vo["lduid"]); ?></td>
+                        <td><?php echo ($vo["teaid"]); ?></td>
                         <td><?php echo ($vo["pos"]); ?></td>
                         <td><?php echo ($vo["zj_zj"]); ?></td>
                         <td><?php echo ($vo["bk_zj"]); ?></td>

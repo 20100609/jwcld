@@ -7,7 +7,8 @@ return array(
     'DB_HOST' => 'localhost',   //服务地址
     'DB_NAME' => 'jwcld',         //数据库名称
     'DB_USER' => 'root',        //用户名
-    'DB_PWD' => '123456',         //密码
+    //'DB_PWD' => '123456',         //密码
+    //'DB_PWD' => '',         //密码
     'DB_PORT' => '3306',        //服务器端口
     'DB_PREFIX' => 'ld_',      //数据库表前缀
     'DB_CHARSET' => 'utf8',     //数据库编码
